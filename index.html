@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="vendor/normalize.css">
+  <link rel="stylesheet" href="pages/index.css">
+  <title>Mesto - для ваших фотографий</title>
+</head>
+<body class="page">
+    <header class="header">
+        <img class="header__logo" src="images/logo.svg" alt="логотип">
+    </header>
+    <main>
+        <section class="profile">
+            <img class="profile__ava" src="images/Kusto.png" alt="">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <p class="profile__desc">Исследователь океана</p>
+            <div class="profile__edit">
+              <img src="images/Vectorpen.svg" alt="">
+            </div>
+            <div class="profile__add-button">
+              <img src="images/vector.svg" alt="">
+            </div>
+        </section>
+        <section>
+          <ul class="elements">
+            <li class="element">
+                <img class="element__image" src="images/Karachaevsk.png" alt="">
+                <div class="element__name-block">
+                    <p class="element__title">Карачаевск</p>
+                    <img class="element__like" src="images/like.svg" alt="">
+                </div>
+            </li>
+            <li class="element">
+              <img class="element__image" src="images/Elbrus.png" alt="">
+              <div class="element__name-block">
+                  <p class="element__title">Эльбрус</p>
+                  <img class="element__like" src="images/like.svg" alt="">
+              </div>
+          </li>
+          <li class="element">
+            <img class="element__image" src="images/Kareliya.jpg" alt="">
+            <div class="element__name-block">
+                <p class="element__title">Карелия</p>
+                <img class="element__like" src="images/like.svg" alt="">
+            </div>
+          </li>
+          <li class="element">
+            <img class="element__image" src="images/Kareliya.jpg" alt="">
+            <div class="element__name-block">
+                <p class="element__title">Карелия</p>
+                <img class="element__like" src="images/like.svg" alt="">
+            </div>
+          </li>
+          <li class="element">
+            <img class="element__image" src="images/Kareliya.jpg" alt="">
+            <div class="element__name-block">
+                <p class="element__title">Карелия</p>
+                <img class="element__like" src="images/like.svg" alt="">
+            </div>
+          </li>
+          </ul>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>© 2020 Mesto Russia</p>
+    </footer>
+    <div class="popup">
+      <div class="popup__content">
+        <button class="popup__close" type="button"></button>
+        <form class="popup__form">
+          <p class="popup__title">Редактировать профиль</p>
+          <fieldset>
+            <input type="text" class="popup__input">
+            <input type="text" class="popup__input">
+          </fieldset>
+          <button type="submit" class="popup__submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+</body>

@@ -1,0 +1,68 @@
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__block/profile__block.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/profile/__ava/profile__ava.css);
+@import url(../blocks/profile/__desc/profile__desc.css);
+@import url(../blocks/profile/__edit/profile__edit.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__title/profile__title.css);
+
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__image/element__image.css);
+@import url(../blocks/element/__like/element__like.css);
+@import url(../blocks/element/__name-block/element__name-block.css);
+@import url(../blocks/element/__title/element__title.css);
+
+@import url(../blocks/footer/footer.css);
+
+
+@import url(../blocks);
+
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/Inter-Regular.woff2") format("woff2"),
+           url("../fonts/Inter-Regular.woff") format("woff");
+  }
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url("../fonts/Inter-Black.woff2") format("woff2"),
+      url("../fonts/Inter-Black.woff") format("woff");
+  }
+
+.page {
+    width: 100%;
+    background-color: #000000;
+    color: #fff;
+    font-family: 'inter';
+  }
+.elements {
+  max-width: 880px;
+  margin: 47px auto 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 30%));
+  grid-template-rows: minmax(50px, 361px);
+  grid-auto-rows: minmax(50px, 361px);
+  grid-gap: 20px 17px;
+  justify-content: center;
+  box-sizing: border-box;
+}
+@media (max-width: 320px) {
+  .elements {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 90%));
+}
+}
+
+
+
+@media (min-width:400px) and (max-width: 700px) {
+}
