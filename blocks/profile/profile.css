@@ -1,7 +1,7 @@
 .profile {
     max-width: 880px;
     margin: 40px auto 0;
-    display: grid; 
+    display: grid;
     grid-template-columns: 120px repeat(2, max-content) auto;
     grid-template-rows: repeat(2, 60px);
     gap: 0 16px;
@@ -21,7 +21,7 @@
 }
 @media (max-width: 450px) {
     .profile {
-        max-width: calc(100% - 10px);        
+        max-width: calc(100% - 10px);  
         grid-template-columns: calc(100% - 20px);
         grid-template-rows: 120px repeat(3, max-content);
         justify-items: center;
