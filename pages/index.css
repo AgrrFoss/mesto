@@ -63,7 +63,13 @@
   justify-content: center;
   box-sizing: border-box;
 }
-@media (max-width: 320px) {
+@media (min-width:400px) and (max-width: 700px) {
+  .elements {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 40%));
+}
+}
+
+@media (max-width: 400px) {
   .elements {
   grid-template-columns: repeat(auto-fit, minmax(200px, 90%));
 }
