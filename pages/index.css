@@ -44,6 +44,14 @@
     src: url("../fonts/Inter-Black.woff2") format("woff2"),
       url("../fonts/Inter-Black.woff") format("woff");
   }
+  @font-face {
+    font-family: 'Inter Medium';
+    font-style:  normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("../fonts/Inter-Medium.woff2") format("woff2"),
+      url("../fonts/Inter-Medium.woff") format("woff");
+  }
 
 .page {
     width: 100%;
