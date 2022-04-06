@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="vendor/normalize.css">
   <link rel="stylesheet" href="pages/index.css">
   <title>Mesto - для ваших фотографий</title>
 </head>
@@ -11,78 +10,77 @@
     <header class="header">
         <img class="header__logo" src="images/logo.svg" alt="логотип">
     </header>
-    <main>
+    <main class="content">
         <section class="profile">
-            <img class="profile__ava" src="images/Kusto.png" alt="">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <img class="profile__ava" src="images/Kusto.png" alt="Аватар пользователя">
+              <div class="profile__name">
+                <h1 class="profile__title">Жак-Ив Кусто</h1>
+                <button type="button" class="profile__edit" aria-label="редактировать профиль"></button>
+              </div>
             <p class="profile__desc">Исследователь океана</p>
-            <div class="profile__edit">
-              <img src="images/Vectorpen.svg" alt="">
-            </div>
-            <div class="profile__add-button">
-              <img src="images/vector.svg" alt="">
-            </div>
+            <button type="button" class="profile__add-button" aria-label="добавить фото"></button>
         </section>
         <section>
           <ul class="elements">
             <li class="element">
-                <img class="element__image" src="images/sakhalin.jpg" alt="">
+                <img class="element__image" src="images/sakhalin.jpg" alt="сахалин">
                 <div class="element__name-block">
-                    <p class="element__title">Сахалин</p>
-                    <div class="element__like"></div>
+                    <h2 class="element__title">Сахалин</h2>
+                    <button type="button" class="element__like"></button>
                 </div>
             </li>
             <li class="element">
-              <img class="element__image" src="images/Karachaevsk.png" alt="">
+              <img class="element__image" src="images/Karachaevsk.png" alt="Церковь в карачаевске">
               <div class="element__name-block">
-                  <p class="element__title">Карачаево-черкесия</p>
-                  <div class="element__like"></div>
+                  <h2 class="element__title">Карачаево-черкесия</h2>
+                  <button type="button" class="element__like"></button>
               </div>
             </li>
             <li class="element">
-              <img class="element__image" src="images/dombay.png" alt="">
+              <img class="element__image" src="images/dombay.png" alt="горы домбая">
               <div class="element__name-block">
-                  <p class="element__title">Домбай</p>
-                  <div class="element__like"></div>
+                  <h2 class="element__title">Домбай</h2>
+                  <button type="button" class="element__like"></button>
               </div>
             </li>
             <li class="element">
-                <img class="element__image" src="images/Elbrus.png" alt="">
+                <img class="element__image" src="images/Elbrus.png" alt="эльбрус">
                 <div class="element__name-block">
-                    <p class="element__title">Эльбрус</p>
-                    <div class="element__like"></div>
+                    <h2 class="element__title">Эльбрус</h2>
+                    <button type="button" class="element__like"></button>
                 </div>
             </li>
             <li class="element">
-                <img class="element__image" src="images/Kareliya.jpg" alt="">
+                <img class="element__image" src="images/Kareliya.jpg" alt="леса карелии">
                 <div class="element__name-block">
-                    <p class="element__title">Карелия</p>
-                    <div class="element__like"></div>
+                    <h2 class="element__title">Карелия</h2>
+                    <button type="button" class="element__like"></button>
                 </div>
             </li>
             <li class="element">
-                <img class="element__image" src="images/Krym.jpg" alt="">
+                <img class="element__image" src="images/Krym.jpg" alt="горы крыма">
                 <div class="element__name-block">
-                    <p class="element__title">Крым</p>
-                    <div class="element__like"></div>
+                    <h2 class="element__title">Крым</h2>
+                    <button type="button" class="element__like"></button>
                 </div>
             </li>
-
           </ul>
         </section>
     </main>
     <footer class="footer">
-        <p>© 2020 Mesto Russia</p>
+        <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
     <div class="popup">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
         <form class="popup__content">
-          <button class="popup__close" type="button"></button>
-          <p class="popup__title">Редактировать профиль</p>
-          <input type="text" class="popup__input" id='nameInput' name="name" value="Жак-Ив Кусто">
-          <input type="text" class="popup__input" id='jobInput' name="job" value="Исследователь океана">
+          <h3 class="popup__title">Редактировать профиль</h3>
+          <input type="text" class="popup__input" id='nameInput' name="name" value="Жак-Ив Кусто" placeholder="Имя пользователя">
+          <input type="text" class="popup__input" id='jobInput' name="job" value="Исследователь океана" placeholder="Род деятельности">
           <button type="submit" class="popup__submit">Сохранить</button>
         </form>
+      </div>
     </div>
-    <script src="script.js"></script> 
+    <script src="scripts/script.js"></script> 
 </body>
 </html>
