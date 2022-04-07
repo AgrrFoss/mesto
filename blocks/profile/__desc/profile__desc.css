@@ -17,8 +17,7 @@
 }
 @media (max-width: 450px) {
     .profile__desc {
-        
-    margin: 14px auto 0;
+        margin: 14px auto 0;
         grid-row: 3/4;
         grid-column: 1/2;
         font-size: 14px;

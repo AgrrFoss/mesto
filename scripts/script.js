@@ -1,12 +1,22 @@
-//Открытие и закрытие окна
-
-let openPopupButton = document.querySelector('.profile__edit');
-let closePopupButton = document.querySelector('.popup__close');
+let profile = document.querySelector('.profile');
+let openPopupButton = profile.querySelector('.profile__edit');
 let popup = document.querySelector('.popup');
+let closePopupButton = popup.querySelector('.popup__close');
+let name = profile.querySelector('.profile__title');
+let job = profile.querySelector('.profile__desc');
+let form = popup.querySelector('.popup__content')
+let nameInput = form.querySelector('#nameInput');
+let jobInput = form.querySelector('#jobInput');
+
+
 function openPopup () {
     popup.classList.add('popup_opened');
+    nameInput.value = name.textContent;
+    jobInput.value = job.textContent;
 }
 openPopupButton.addEventListener('click', openPopup);
+
+
 function closePopup () {
     popup.classList.remove('popup_opened');
 }
@@ -14,12 +24,6 @@ closePopupButton.addEventListener('click', closePopup);
 
 
 
-// Находим форму в DOM
-let form = document.querySelector('.popup__content')
-// Находим поля формы в DOM
-let nameInput = form.querySelector('#nameInput');
-let jobInput = form.querySelector('#jobInput');
-let profile = document.querySelector('.profile');
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formSubmitHandler (evt) {
@@ -28,8 +32,6 @@ function formSubmitHandler (evt) {
                                                 // О том, как это делать, расскажем позже.
    // Получите значение полей jobInput и nameInput из свойства value
    // Выберите элементы, куда должны быть вставлены значения полей
-  let name = profile.querySelector('.profile__title');
-  let job = profile.querySelector('.profile__desc');
     // Вставьте новые значения с помощью textContent
     name.textContent = nameInput.value;
     job.textContent = jobInput.value;

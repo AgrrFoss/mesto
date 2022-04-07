@@ -9,11 +9,12 @@
 @media (max-width: 700px) {
     .profile__ava {
       width: 80px;
-    }
+  }
 }
 @media (max-width: 450px) {
   .profile__ava {
     grid-row: 1/2;
     margin-right: 0px;
-}
+    width: 120px;
+  }
 }
