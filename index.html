@@ -24,6 +24,7 @@
           <ul class="elements">
             <li class="element">
                 <img class="element__image" src="images/sakhalin.jpg" alt="сахалин">
+                <div class="element__delete"></div>
                 <div class="element__name-block">
                     <h2 class="element__title">Сахалин</h2>
                     <button type="button" class="element__like"></button>
@@ -70,10 +71,11 @@
     <footer class="footer">
         <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup" id="editPopup">
       <div class="popup__container">
-        <button class="popup__close" type="button"></button>
-        <form class="popup__content" name="edit-profile-form">
+        
+        <form class="popup__form" name="edit-profile-form">
+          <button class="popup__close" type="button"></button>
           <h3 class="popup__title">Редактировать профиль</h3>
           <input type="text" class="popup__input" id='nameInput' name="name" value="Жак-Ив Кусто" placeholder="Имя пользователя">
           <input type="text" class="popup__input" id='jobInput' name="job" value="Исследователь океана" placeholder="Род деятельности">
@@ -81,6 +83,34 @@
         </form>
       </div>
     </div>
+    <div class="popup" id="addPopup">
+      <div class="popup__container">
+        
+        <form class="popup__form" name="add-place-form">
+          <button class="popup__close" type="button"></button>
+          <h3 class="popup__title">Новое место</h3>
+          <input type="text" class="popup__input" id='placeNameInput' name="placeName" value="" placeholder="Название">
+          <input type="text" class="popup__input" id='placeLinkInput' name="link" value="" placeholder="Ссылка на картинку">
+          <button type="submit" class="popup__submit">Создать</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_opened" id="photoPopup">
+      <div class="popup__container">
+          <button class="popup__close" type="button"></button>
+          <img class="popup__image" src="images/Karachaevsk.png">
+          <h3 class="popup__image-name">Карачаево-черкесия</h3>
+      </div>
+    </div>
+    <template id="element">
+      <li class="element">
+        <img class="element__image" src="images/Krym.jpg" alt="горы крыма">
+        <div class="element__name-block">
+          <h2 class="element__title">Крым</h2>
+          <button type="button" class="element__like"></button>
+        </div>
+      </li>
+    </template>
     <script src="scripts/script.js"></script> 
 </body>
 </html>

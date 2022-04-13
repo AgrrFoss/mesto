@@ -7,7 +7,10 @@
     left: 0;
     right: 0;
     background-color: rgba(0, 0 , 0,  .5);
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 1s, opacity 1s ease;
+    display: flex;
     font-family: "Inter", Arial, sans-serif;
 }
 @media (max-width: 500px) {

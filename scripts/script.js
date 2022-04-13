@@ -1,41 +1,60 @@
+//...........................Код отвечает за изменение информации о пользователе..............................................
 let profile = document.querySelector('.profile');
-let openPopupButton = profile.querySelector('.profile__edit');
-let popup = document.querySelector('.popup');
-let closePopupButton = popup.querySelector('.popup__close');
+let openProfileEditButton = profile.querySelector('.profile__edit');
+let editPopup = document.querySelector('#editPopup');
+let closeEditPopupButton = editPopup.querySelector('.popup__close');
 let name = profile.querySelector('.profile__title');
 let job = profile.querySelector('.profile__desc');
-let form = popup.querySelector('.popup__content')
-let nameInput = form.querySelector('#nameInput');
-let jobInput = form.querySelector('#jobInput');
+let editForm = editPopup.querySelector('.popup__form')
+let nameInput = editForm.querySelector('#nameInput');
+let jobInput = editForm.querySelector('#jobInput');
+
+////..........функции открытия и закрытия Попапов........
+function closePopup (popupName) {
+  popupName.classList.remove('popup_opened');
+}
+function openPopup(popupName) {
+    popupName.classList.add('popup_opened');
+}
 
 
-function openPopup () {
-    popup.classList.add('popup_opened');
+//.....Открыть попап редактирования профиля......
+function openEditPopup () {
+    openPopup(editPopup);
     nameInput.value = name.textContent;
     jobInput.value = job.textContent;
 }
-openPopupButton.addEventListener('click', openPopup);
-
-
-function closePopup () {
-    popup.classList.remove('popup_opened');
-}
-closePopupButton.addEventListener('click', closePopup);
-
-
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
+openProfileEditButton.addEventListener('click', openEditPopup);
+//......Закрыть попап редактирования профиля........
+closeEditPopupButton.addEventListener('click', () => closePopup(editPopup));
+//....обработка данных формы..................
 function formSubmitHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
-   // Получите значение полей jobInput и nameInput из свойства value
-   // Выберите элементы, куда должны быть вставлены значения полей
-    // Вставьте новые значения с помощью textContent
     name.textContent = nameInput.value;
     job.textContent = jobInput.value;
-    closePopup ()
-    
+    closePopup(editPopup);
 }
-form.addEventListener('submit', formSubmitHandler);
+editForm.addEventListener('submit', formSubmitHandler);
+
+//......................... Код для открытия и закрытия попапа добавления карточки.........................
+
+let openAddButton = profile.querySelector('.profile__add-button');
+let addPopup = document.querySelector('#addPopup'); //Попап добавления картинки
+let closeAddPopupButton = addPopup.querySelector('.popup__close');
+let addForm = addPopup.querySelector('.popup__form')
+//.....Открыть попап......
+openAddButton.addEventListener('click', () => openPopup (addPopup));
+//.....Закрыть попап......
+closeAddPopupButton.addEventListener('click', () => closePopup(addPopup));
+//.........Написать функцию работы попапа...........
+function formAddPlace (evt) {
+    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+    closePopup (addPopup);
+}
+addForm.addEventListener('submit', formAddPlace);
+
+//............................Код попапа с фотографией.................................................
+let photoPopup = document.querySelector('#photoPopup');
+let closePhotoPopupButton = photoPopup.querySelector('.popup__close');
+
+closePhotoPopupButton.addEventListener('click', () => closePopup(photoPopup));
