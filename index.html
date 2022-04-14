@@ -22,12 +22,13 @@
         </section>
         <section>
           <ul class="elements">
+            <!--
             <li class="element">
                 <img class="element__image" src="images/sakhalin.jpg" alt="сахалин">
                 <div class="element__delete"></div>
                 <div class="element__name-block">
                     <h2 class="element__title">Сахалин</h2>
-                    <button type="button" class="element__like"></button>
+                    <button type="button" class="element__like element__like_active"></button>
                 </div>
             </li>
             <li class="element">
@@ -65,6 +66,7 @@
                     <button type="button" class="element__like"></button>
                 </div>
             </li>
+          -->
           </ul>
         </section>
     </main>
@@ -73,7 +75,6 @@
     </footer>
     <div class="popup" id="editPopup">
       <div class="popup__container">
-        
         <form class="popup__form" name="edit-profile-form">
           <button class="popup__close" type="button"></button>
           <h3 class="popup__title">Редактировать профиль</h3>
@@ -83,9 +84,11 @@
         </form>
       </div>
     </div>
+
+
+    <!---Попап добавления карточки-->
     <div class="popup" id="addPopup">
       <div class="popup__container">
-        
         <form class="popup__form" name="add-place-form">
           <button class="popup__close" type="button"></button>
           <h3 class="popup__title">Новое место</h3>
@@ -95,18 +98,21 @@
         </form>
       </div>
     </div>
-    <div class="popup popup_opened" id="photoPopup">
+    
+    <!---Попап с фотографией-->
+    <div class="popup" id="photoPopup">
       <div class="popup__container">
           <button class="popup__close" type="button"></button>
           <img class="popup__image" src="images/Karachaevsk.png">
           <h3 class="popup__image-name">Карачаево-черкесия</h3>
       </div>
     </div>
-    <template id="element">
+    <template id="elementTemplate">
       <li class="element">
-        <img class="element__image" src="images/Krym.jpg" alt="горы крыма">
+        <img class="element__image" src="" alt="горы крыма">
+        <div class="element__delete"></div>
         <div class="element__name-block">
-          <h2 class="element__title">Крым</h2>
+          <h2 class="element__title"></h2>
           <button type="button" class="element__like"></button>
         </div>
       </li>

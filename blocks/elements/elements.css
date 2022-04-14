@@ -4,8 +4,8 @@
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 32%));
-    grid-template-rows: minmax(50px, 361px);
-    grid-auto-rows: minmax(50px, 361px);
+    grid-template-rows: minmax(50px, 370px);
+    grid-auto-rows: minmax(50px, 370px);
     grid-gap: 20px 17px;
     justify-content: center;
     box-sizing: border-box;
