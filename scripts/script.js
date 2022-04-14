@@ -16,8 +16,6 @@ function closePopup (popupName) {
 function openPopup(popupName) {
     popupName.classList.add('popup_opened');
 }
-
-
 //.....Открыть попап редактирования профиля......
 function openEditPopup () {
     openPopup(editPopup);
@@ -68,6 +66,7 @@ const initialCards = [
 let elements = document.querySelector('.elements');//Находим куда добавлять элементы
 let elementTemplate = document.querySelector('#elementTemplate');//Находим шаблон элемента
 let elementPlace// = elementTemplate.content.cloneNode(true);//Клонируем элемент с содержимым
+const photoPopup = document.querySelector('#photoPopup');
 
 function render () {
     const cards = initialCards.map(getCard);
@@ -85,10 +84,23 @@ function getCard(item) {
     const likeButton = elementPlace.querySelector('.element__like');
 
     deleteButton.addEventListener('click', deleteCard);
-    likeButton.addEventListener('click', likeCard)
-
+    likeButton.addEventListener('click', likeCard);
+    imagePlace.addEventListener('click', imageView);
+    
+    
     return elementPlace;
 }
+
+function imageView (evt) {
+  openPopup(photoPopup)
+  const card = evt.target.parentElement;
+  const popupImage = photoPopup.querySelector('.popup__image');
+  const popupTitle = photoPopup.querySelector('.popup__image-name');
+  popupImage.src = card.querySelector('.element__image').src;
+  popupTitle.textContent = card.querySelector('.element__title').textContent;
+}
+let closePhotoPopupButton = photoPopup.querySelector('.popup__close');
+closePhotoPopupButton.addEventListener('click', () => closePopup(photoPopup));
 function deleteCard (evt) {
 const card = evt.target.closest('.element');
 card.remove();
@@ -121,11 +133,4 @@ function formAddPlace (evt) {
     elements.prepend(card); 
     closePopup (addPopup);
 }
-
 addForm.addEventListener('submit', formAddPlace);
-
-//............................Код попапа с фотографией.................................................
-let photoPopup = document.querySelector('#photoPopup');
-let closePhotoPopupButton = photoPopup.querySelector('.popup__close');
-
-closePhotoPopupButton.addEventListener('click', () => closePopup(photoPopup));
