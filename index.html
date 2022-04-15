@@ -29,13 +29,27 @@
     <footer class="footer">
         <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
-    <div class="popup" id="editPopup">
+    <div class="popup" id="popupEdit">
       <div class="popup__container">
         <form class="popup__form" name="edit-profile-form">
           <button class="popup__close" type="button"></button>
           <h3 class="popup__title">Редактировать профиль</h3>
-          <input type="text" class="popup__input" id='nameInput' name="name" value="Жак-Ив Кусто" placeholder="Имя пользователя">
-          <input type="text" class="popup__input" id='jobInput' name="job" value="Исследователь океана" placeholder="Род деятельности">
+          <input
+          type="text" 
+          class="popup__input" 
+          id='nameInput' 
+          name="name" 
+          value="" 
+          placeholder="Имя пользователя" 
+          required>
+          <input 
+          type="text" 
+          class="popup__input" 
+          id='jobInput' 
+          name="job"
+          value=""
+          placeholder="Род деятельности" 
+          required>
           <button type="submit" class="popup__submit">Сохранить</button>
         </form>
       </div>
@@ -43,20 +57,33 @@
 
 
     <!---Попап добавления карточки-->
-    <div class="popup" id="addPopup">
+    <div class="popup" id="popupAdd">
       <div class="popup__container">
         <form class="popup__form" name="add-place-form">
           <button class="popup__close" type="button"></button>
           <h3 class="popup__title">Новое место</h3>
-          <input type="text" class="popup__input" id='placeNameInput' name="placeName" value="" placeholder="Название">
-          <input type="text" class="popup__input" id='placeLinkInput' name="link" value="" placeholder="Ссылка на картинку">
+          <input
+           type="text"
+           class="popup__input"
+           id='placeNameInput' 
+           name="placeName" 
+           value="" 
+           placeholder="Название"
+           >
+          <input 
+          type="url" 
+          class="popup__input" 
+          id='placeLinkInput' 
+          name="link" 
+          value="" 
+          placeholder="Ссылка на картинку">
           <button type="submit" class="popup__submit">Создать</button>
         </form>
       </div>
     </div>
     
     <!---Попап с фотографией-->
-    <div class="popup" id="photoPopup">
+    <div class="popup popup_dart-bg" id="photoPopup">
       <div class="popup__container">
           <button class="popup__close" type="button"></button>
           <img class="popup__image" src="images/Elbrus.png" alt="место">
@@ -74,6 +101,7 @@
         </div>
       </li>
     </template>
-    <script src="scripts/script.js"></script> 
+    <script src="scripts/cards.js"></script> 
+    <script src="scripts/index.js"></script> 
 </body>
 </html>
