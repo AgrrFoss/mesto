@@ -16,6 +16,8 @@ const buttonOpenAddPopup = profile.querySelector(".profile__add-button");
 const popupAdd = document.querySelector("#popupAdd"); //Попап добавления картинки
 const buttonCloseAddPopup = popupAdd.querySelector(".popup__close");
 const formAdd = popupAdd.querySelector(".popup__form"); //Форма ПопАпа добавления карточки
+const placeNameInput = formAdd.querySelector("#placeNameInput").value; //Ввод названия места
+const placeLinkInput = formAdd.querySelector("#placeLinkInput").value;
 
 ////..........функции открытия и закрытия Попапов........
 function closePopup(popupName) {
@@ -31,16 +33,11 @@ function openEditPopup() {
   openPopup(popupEdit);
 }
 //....обработка данных формы..................
-function formSubmitHandler(evt) {
+function editProfileInfo(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   name.textContent = nameInput.value;
   job.textContent = jobInput.value;
   closePopup(popupEdit);
-}
-
-function render() {
-  const cards = initialCards.map(getCard);
-  elements.prepend(...cards);
 }
 function getCard(item) {
   console.log(item);
@@ -55,11 +52,22 @@ function getCard(item) {
 
   buttonDelete.addEventListener("click", deleteCard);
   buttonLike.addEventListener("click", likeCard);
-  imagePlace.addEventListener("click", imageView);
+  imagePlace.addEventListener("click", viewImage);
 
   return elementPlace;
 }
-function imageView(evt) {
+function render() {
+  const cards = initialCards.map(getCard);
+  elements.prepend(...cards);
+}
+function addPlaceForm(evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. //Ввод ссылки на фото
+  const card = getCard({ link: placeLinkInput, name: placeNameInput });
+  elements.prepend(card);
+  closePopup(popupAdd);
+}
+
+function viewImage(evt) {
   openPopup(photoPopup);
   const card = evt.target.parentElement;
   const popupImage = photoPopup.querySelector(".popup__image");
@@ -67,7 +75,6 @@ function imageView(evt) {
   popupImage.src = card.querySelector(".element__image").src;
   popupTitle.textContent = card.querySelector(".element__title").textContent;
 }
-buttonClosePhotoPopup.addEventListener("click", () => closePopup(photoPopup));
 function deleteCard(evt) {
   const card = evt.target.closest(".element");
   card.remove();
@@ -77,18 +84,10 @@ function likeCard(evt) {
   like.classList.toggle("element__like_active");
 }
 render();
-function addPlaceForm(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  const elementPlace = elementTemplate.content.cloneNode(true); //Клонируем элемент с содержимым !!! Его нельзя удалить, без него форма не работает
-  const placeNameInput = formAdd.querySelector("#placeNameInput").value; //Ввод названия места
-  const placeLinkInput = formAdd.querySelector("#placeLinkInput").value; //Ввод ссылки на фото
-  const card = getCard({ link: placeLinkInput, name: placeNameInput });
-  elements.prepend(card);
-  closePopup(popupAdd);
-}
 
-formEdit.addEventListener("submit", formSubmitHandler);
+formEdit.addEventListener("submit", editProfileInfo);
 formAdd.addEventListener("submit", addPlaceForm);
+buttonClosePhotoPopup.addEventListener("click", () => closePopup(photoPopup));
 buttonOpenProfileEdit.addEventListener("click", openEditPopup);
 buttonCloseEditPopup.addEventListener("click", () => closePopup(popupEdit));
 buttonOpenAddPopup.addEventListener("click", () => openPopup(popupAdd));
