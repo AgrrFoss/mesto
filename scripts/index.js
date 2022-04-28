@@ -16,8 +16,7 @@ const buttonOpenAddPopup = profile.querySelector(".profile__add-button");
 const popupAdd = document.querySelector("#popupAdd"); //Попап добавления картинки
 const buttonCloseAddPopup = popupAdd.querySelector(".popup__close");
 const formAdd = popupAdd.querySelector(".popup__form"); //Форма ПопАпа добавления карточки
-const placeNameInput = formAdd.querySelector("#placeNameInput").value; //Ввод названия места
-const placeLinkInput = formAdd.querySelector("#placeLinkInput").value;
+
 
 ////..........функции открытия и закрытия Попапов........
 function closePopup(popupName) {
@@ -40,7 +39,6 @@ function editProfileInfo(evt) {
   closePopup(popupEdit);
 }
 function getCard(item) {
-  console.log(item);
   const elementPlace = elementTemplate.content.cloneNode(true); //Клонируем элемент с содержимым из шаблона
   console.log(elementPlace);
   const imagePlace = elementPlace.querySelector(".element__image");
@@ -62,9 +60,12 @@ function render() {
 }
 function addPlaceForm(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. //Ввод ссылки на фото
+  const placeNameInput = formAdd.querySelector("#placeNameInput").value; //Ввод названия места
+  const placeLinkInput = formAdd.querySelector("#placeLinkInput").value;
   const card = getCard({ link: placeLinkInput, name: placeNameInput });
   elements.prepend(card);
   closePopup(popupAdd);
+  formAdd.reset();
 }
 
 function viewImage(evt) {
