@@ -20,6 +20,22 @@ const placeNameInput = formAdd.querySelector("#placeNameInput"); //Ввод на
 const placeLinkInput = formAdd.querySelector("#placeLinkInput");
 
 
+
+
+//........................закрытие попапов кликом по оверлей. Не работает! НАйти причину
+
+
+const popups = document.querySelectorAll('.popup');
+const setClosePopup = () => {
+  popups.forEach(function (popup) {
+    popup.addEventListener('click', (evt) => {
+      console.log(evt);
+      if (evt.target.classList.contains('popup_opened')) {
+        closePopup(popup);
+      }
+    })
+  })
+}
 ////..........функции открытия и закрытия Попапов........
 function closePopup(popupName) {
   popupName.classList.remove("popup_opened");
@@ -93,6 +109,21 @@ buttonOpenProfileEdit.addEventListener("click", openEditPopup);
 buttonCloseEditPopup.addEventListener("click", () => closePopup(popupEdit));
 buttonOpenAddPopup.addEventListener("click", () => openPopup(popupAdd));
 buttonCloseAddPopup.addEventListener("click", () => closePopup(popupAdd));
+document.addEventListener('keyup', function (evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupEdit);
+    closePopup(popupAdd);
+    closePopup(photoPopup);
+  };
+});
+
+//......................Попоытка реализовать эту функцию в упрощенном виде................
+document.addEventListener('click', function(evt) {
+  if (evt.target.classList.contains('.popup_opened')) {
+    closePopup(popupEdit);
+  }
+  console.log(evt.target);
+})
 
 
 
