@@ -10,6 +10,15 @@
   line-height: 1.2px;
   width: 358px;
 }
+.popup__input:invalid {
+  border: 1px solid #FF0000;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+.popup__input_type_error {
+  border-bottom-color: red;
+}
 @media (max-width: 500px) {
   .popup__input  {
     width: 238px;

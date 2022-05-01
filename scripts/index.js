@@ -16,6 +16,8 @@ const buttonOpenAddPopup = profile.querySelector(".profile__add-button");
 const popupAdd = document.querySelector("#popupAdd"); //Попап добавления картинки
 const buttonCloseAddPopup = popupAdd.querySelector(".popup__close");
 const formAdd = popupAdd.querySelector(".popup__form"); //Форма ПопАпа добавления карточки
+const placeNameInput = formAdd.querySelector("#placeNameInput"); //Ввод названия места
+const placeLinkInput = formAdd.querySelector("#placeLinkInput");
 
 
 ////..........функции открытия и закрытия Попапов........
@@ -60,9 +62,7 @@ function render() {
 }
 function addPlaceForm(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. //Ввод ссылки на фото
-  const placeNameInput = formAdd.querySelector("#placeNameInput").value; //Ввод названия места
-  const placeLinkInput = formAdd.querySelector("#placeLinkInput").value;
-  const card = getCard({ link: placeLinkInput, name: placeNameInput });
+  const card = getCard({ link: placeLinkInput.value, name: placeNameInput.value });
   elements.prepend(card);
   closePopup(popupAdd);
   formAdd.reset();
@@ -93,3 +93,6 @@ buttonOpenProfileEdit.addEventListener("click", openEditPopup);
 buttonCloseEditPopup.addEventListener("click", () => closePopup(popupEdit));
 buttonOpenAddPopup.addEventListener("click", () => openPopup(popupAdd));
 buttonCloseAddPopup.addEventListener("click", () => closePopup(popupAdd));
+
+
+
