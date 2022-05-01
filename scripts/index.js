@@ -19,12 +19,6 @@ const formAdd = popupAdd.querySelector(".popup__form"); //Форма ПопАп�
 const placeNameInput = formAdd.querySelector("#placeNameInput"); //Ввод названия места
 const placeLinkInput = formAdd.querySelector("#placeLinkInput");
 
-
-
-
-//........................закрытие попапов кликом по оверлей. Не работает! НАйти причину
-
-
 const popups = document.querySelectorAll('.popup');
 const setClosePopup = () => {
   popups.forEach(function (popup) {
@@ -36,6 +30,7 @@ const setClosePopup = () => {
     })
   })
 }
+setClosePopup ();
 ////..........функции открытия и закрытия Попапов........
 function closePopup(popupName) {
   popupName.classList.remove("popup_opened");
@@ -116,14 +111,3 @@ document.addEventListener('keyup', function (evt) {
     closePopup(photoPopup);
   };
 });
-
-//......................Попоытка реализовать эту функцию в упрощенном виде................
-document.addEventListener('click', function(evt) {
-  if (evt.target.classList.contains('.popup_opened')) {
-    closePopup(popupEdit);
-  }
-  console.log(evt.target);
-})
-
-
-
