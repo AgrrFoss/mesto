@@ -8,7 +8,8 @@ const job = profile.querySelector(".profile__desc");
 const formEdit = popupEdit.querySelector(".popup__form");
 const nameInput = formEdit.querySelector("#nameInput");
 const jobInput = formEdit.querySelector("#jobInput");
-const elements = document.querySelector(".elements"); //Находим куда добавлять элементы
+const elements = document.querySelector(".elements"); //елемент не в единственном числе, это блок куда добавляются элементы, потому и назывл его
+//"Элементы". поnому что туда добавялются элементы из темплейта. Если я ошибаюсь, то какое имя ему нужно задать, чтобы не сбивать при этом с толку
 const elementTemplate = document.querySelector("#elementTemplate"); //Находим шаблон элемента
 const photoPopup = document.querySelector("#photoPopup");
 const buttonClosePhotoPopup = photoPopup.querySelector(".popup__close");
@@ -31,11 +32,22 @@ const setClosePopup = () => {
   })
 }
 setClosePopup ();
+//....................Функция закрытия попапа по нажатию на Esc........................
+const closePopupEsc = (evt) => {
+  console.log (evt)
+  const openedPopup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(openedPopup);
+    }
+  }
+
 ////..........функции открытия и закрытия Попапов........
 function closePopup(popupName) {
+  document.removeEventListener('keyup', closePopupEsc)
   popupName.classList.remove("popup_opened");
 }
 function openPopup(popupName) {
+  document.addEventListener('keyup', closePopupEsc)
   popupName.classList.add("popup_opened");
 }
 //.....Открыть попап редактирования профиля......
@@ -74,9 +86,12 @@ function render() {
 function addPlaceForm(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. //Ввод ссылки на фото
   const card = getCard({ link: placeLinkInput.value, name: placeNameInput.value });
+  const buttonSubmit = formAdd.querySelector('.popup__submit');
   elements.prepend(card);
   closePopup(popupAdd);
   formAdd.reset();
+  buttonSubmit.classList.add('popup__submit_unactive');
+  buttonSubmit.setAttribute('disabled', true);
 }
 
 function viewImage(evt) {
@@ -104,10 +119,3 @@ buttonOpenProfileEdit.addEventListener("click", openEditPopup);
 buttonCloseEditPopup.addEventListener("click", () => closePopup(popupEdit));
 buttonOpenAddPopup.addEventListener("click", () => openPopup(popupAdd));
 buttonCloseAddPopup.addEventListener("click", () => closePopup(popupAdd));
-document.addEventListener('keyup', function (evt) {
-  if (evt.key === 'Escape') {
-    closePopup(popupEdit);
-    closePopup(popupAdd);
-    closePopup(photoPopup);
-  };
-});
