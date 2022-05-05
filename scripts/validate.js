@@ -1,6 +1,11 @@
-const formElement = document.querySelector('.popup__form');
-const formInput = formElement.querySelector('.popup__input')
-const formError = formElement.querySelector(`.${formInput.id}-error`);
+//const formElement = document.querySelector('.popup__form');
+//const formInput = formElement.querySelector('.popup__input')
+//const formError = formElement.querySelector(`.${formInput.id}-error`);
+
+const disableSubmitButton = (buttonElement) => {
+  buttonElement.classList.add('popup__submit_unactive');
+  buttonElement.setAttribute('disabled', true);
+}
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -17,7 +22,6 @@ const hideInputError = (formElement, inputElement) => {
 }
 
 const isValid = (formElement, inputElement) => {
-  const submitButton = formElement.querySelector('.popup__submit');
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
@@ -32,8 +36,7 @@ const hasInvalidInput = (inputList) => {
 
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-   buttonElement.classList.add('popup__submit_unactive');
-   buttonElement.setAttribute('disabled', true);
+    disableSubmitButton (buttonElement);
   } else {
     buttonElement.removeAttribute('disabled', true);
     buttonElement.classList.remove('popup__submit_unactive');

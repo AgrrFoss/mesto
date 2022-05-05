@@ -34,7 +34,6 @@ const setClosePopup = () => {
 setClosePopup ();
 //....................Функция закрытия попапа по нажатию на Esc........................
 const closePopupEsc = (evt) => {
-  console.log (evt)
   const openedPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
     closePopup(openedPopup);
@@ -90,8 +89,7 @@ function addPlaceForm(evt) {
   elements.prepend(card);
   closePopup(popupAdd);
   formAdd.reset();
-  buttonSubmit.classList.add('popup__submit_unactive');
-  buttonSubmit.setAttribute('disabled', true);
+  disableSubmitButton (buttonSubmit);
 }
 
 function viewImage(evt) {
