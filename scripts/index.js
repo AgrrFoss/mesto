@@ -10,7 +10,7 @@ const nameInput = formEdit.querySelector("#nameInput");
 const jobInput = formEdit.querySelector("#jobInput");
 const elements = document.querySelector(".elements"); //елемент не в единственном числе, это блок куда добавляются элементы, потому и назывл его
 //"Элементы". поnому что туда добавялются элементы из темплейта. Если я ошибаюсь, то какое имя ему нужно задать, чтобы не сбивать при этом с толку
-const elementTemplate = document.querySelector("#elementTemplate"); //Находим шаблон элемента
+const elementTemplate = document.querySelector("#elementTemplate"); //**Найден в _getElement**Находим шаблон элемента
 const photoPopup = document.querySelector("#photoPopup");
 const buttonClosePhotoPopup = photoPopup.querySelector(".popup__close");
 const buttonOpenAddPopup = profile.querySelector(".profile__add-button");
@@ -55,16 +55,17 @@ function openEditPopup() {
   jobInput.value = job.textContent;
   openPopup(popupEdit);
 }
-//....обработка данных формы..................
+//....обработка данных формы редактирования данных профиля..................
 function editProfileInfo(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   name.textContent = nameInput.value;
   job.textContent = jobInput.value;
   closePopup(popupEdit);
 }
+
+/*
 function getCard(item) {
   const elementPlace = elementTemplate.content.cloneNode(true); //Клонируем элемент с содержимым из шаблона
-  console.log(elementPlace);
   const imagePlace = elementPlace.querySelector(".element__image");
   imagePlace.src = item.link;
   const namePlace = elementPlace.querySelector(".element__title");
@@ -78,10 +79,30 @@ function getCard(item) {
 
   return elementPlace;
 }
+
 function render() {
   const cards = initialCards.map(getCard);
   elements.prepend(...cards);
 }
+*/
+function render() {
+  initialCards.forEach((item) => {
+    const card = new Card(item, '#elementTemplate');
+    const cards = card.getCard();
+    elements.prepend(cards);
+  })
+}
+/*
+messageList.forEach((item) => {
+  // передаём селектор темплейта при создании
+    const card = new Card(item, '.card-template_type_default');
+    const cardElement = card.generateCard();
+
+    document.body.append(cardElement);
+}); 
+
+*/
+
 function addPlaceForm(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. //Ввод ссылки на фото
   const card = getCard({ link: placeLinkInput.value, name: placeNameInput.value });
