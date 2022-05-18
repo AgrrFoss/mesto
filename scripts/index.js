@@ -11,7 +11,7 @@ const jobInput = formEdit.querySelector("#jobInput");
 const elements = document.querySelector(".elements"); //елемент не в единственном числе, это блок куда добавляются элементы, потому и назывл его
 //"Элементы". поnому что туда добавялются элементы из темплейта. Если я ошибаюсь, то какое имя ему нужно задать, чтобы не сбивать при этом с толку
 const elementTemplate = document.querySelector("#elementTemplate"); //**Найден в _getElement**Находим шаблон элемента
-const photoPopup = document.querySelector("#photoPopup");
+//const photoPopup = document.querySelector("#photoPopup");
 const buttonClosePhotoPopup = photoPopup.querySelector(".popup__close");
 const buttonOpenAddPopup = profile.querySelector(".profile__add-button");
 const popupAdd = document.querySelector("#popupAdd"); //Попап добавления картинки
@@ -89,30 +89,26 @@ function render() {
   initialCards.forEach((item) => {
     const card = new Card(item, '#elementTemplate');
     const cards = card.getCard();
-    elements.prepend(cards);
+    elements.append(cards);
   })
 }
-/*
-messageList.forEach((item) => {
-  // передаём селектор темплейта при создании
-    const card = new Card(item, '.card-template_type_default');
-    const cardElement = card.generateCard();
 
-    document.body.append(cardElement);
-}); 
-
-*/
 
 function addPlaceForm(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. //Ввод ссылки на фото
-  const card = getCard({ link: placeLinkInput.value, name: placeNameInput.value });
+  //const card = getCard({ link: placeLinkInput.value, name: placeNameInput.value });
+  const placeObj = {
+    link: placeLinkInput.value,
+    name: placeNameInput.value
+  }  
+  const card = new Card(placeObj, '#elementTemplate').getCard();
   const buttonSubmit = formAdd.querySelector('.popup__submit');
   elements.prepend(card);
   closePopup(popupAdd);
   formAdd.reset();
   disableSubmitButton (buttonSubmit);
 }
-
+/*
 function viewImage(evt) {
   openPopup(photoPopup);
   const card = evt.target.parentElement;
@@ -129,6 +125,7 @@ function likeCard(evt) {
   const like = evt.target;
   like.classList.toggle("element__like_active");
 }
+*/
 render();
 
 formEdit.addEventListener("submit", editProfileInfo);
