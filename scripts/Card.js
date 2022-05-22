@@ -1,4 +1,5 @@
-class Card {
+import {photoPopup, openPopup} from './index.js'
+export  default class Card {
     constructor (data, cardTemplate){
     this._link = data.link;
     this._name = data.name;
@@ -19,7 +20,7 @@ class Card {
       this._setEventListeners();
       this._element.querySelector('.element__image').src = this._link;
       this._element.querySelector('.element__title').textContent = this._name;
-        
+      this._element.querySelector('.element__image').alt = this._name;  
       return this._element;
     }
 
@@ -42,13 +43,14 @@ class Card {
 
     _handleDeleteCard () {
       this._element.remove();
+      this._element = null;
     }
     
     _handleViewImage () {
-      const photoPopup = document.querySelector("#photoPopup");
       const popupImage = photoPopup.querySelector(".popup__image");
       const popupTitle = photoPopup.querySelector(".popup__image-name");
       popupImage.src = this._link;
+      popupImage.alt = this._name;
       popupTitle.textContent = this._name;
       openPopup(photoPopup);
     }

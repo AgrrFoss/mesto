@@ -1,4 +1,5 @@
-class FormValidator {
+import { config } from "./index.js";
+export  default class FormValidator {
     constructor (form, config) {
         this._formElement = form,
         this._config = config

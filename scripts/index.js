@@ -1,3 +1,7 @@
+import Card from './Card.js'
+import FormValidator from './FormValidator.js'
+
+
 //...........................Код отвечает за изменение информации о пользователе..............................................
 const profile = document.querySelector(".profile");
 const buttonOpenProfileEdit = profile.querySelector(".profile__edit");
@@ -10,6 +14,7 @@ const nameInput = formEdit.querySelector("#nameInput");
 const jobInput = formEdit.querySelector("#jobInput");
 const elements = document.querySelector(".elements"); //елемент не в единственном числе, это блок куда добавляются элементы, потому и назвал его
 //"Элементы". поnому что туда добавялются элементы из темплейта. Если я ошибаюсь, то какое имя ему нужно задать, чтобы не сбивать при этом с толку
+const photoPopup = document.querySelector("#photoPopup");
 const buttonClosePhotoPopup = photoPopup.querySelector(".popup__close");
 const buttonOpenAddPopup = profile.querySelector(".profile__add-button");
 const popupAdd = document.querySelector("#popupAdd"); //Попап добавления картинки
@@ -17,6 +22,7 @@ const buttonCloseAddPopup = popupAdd.querySelector(".popup__close");
 const formAdd = popupAdd.querySelector(".popup__form"); //Форма ПопАпа добавления карточки
 const placeNameInput = formAdd.querySelector("#placeNameInput"); //Ввод названия места
 const placeLinkInput = formAdd.querySelector("#placeLinkInput");
+const buttonSubmit = formAdd.querySelector('.popup__submit');
 
 const popups = document.querySelectorAll('.popup');
 
@@ -49,8 +55,8 @@ const setClosePopup = () => {
 setClosePopup ();
 //....................Функция закрытия попапа по нажатию на Esc........................
 const closePopupEsc = (evt) => {
-  const openedPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
     }
   }
@@ -78,12 +84,14 @@ function editProfileInfo(evt) {
   closePopup(popupEdit);
 }
 
+function makeCards (data, selector) {
+  return new Card(data, selector).getCard();
+}
 
 function render() {
   initialCards.forEach((item) => {
-    const card = new Card(item, '#elementTemplate');
-    const cards = card.getCard();
-    elements.append(cards);
+   // const cards = new Card(item, '#elementTemplate').getCard();
+    elements.append(makeCards (item, '#elementTemplate'));
   })
 }
 
@@ -94,9 +102,8 @@ function addPlaceForm(evt) {
     link: placeLinkInput.value,
     name: placeNameInput.value
   }  
-  const card = new Card(placeObj, '#elementTemplate').getCard();
-  const buttonSubmit = formAdd.querySelector('.popup__submit');
-  elements.prepend(card);
+  //const card = new Card(placeObj, '#elementTemplate').getCard();
+  elements.prepend(makeCards (placeObj, '#elementTemplate'));
   closePopup(popupAdd);
   formAdd.reset();
   validateCardForm.disableSubmitButton(buttonSubmit);
@@ -114,3 +121,4 @@ buttonOpenProfileEdit.addEventListener("click", openEditPopup);
 buttonCloseEditPopup.addEventListener("click", () => closePopup(popupEdit));
 buttonOpenAddPopup.addEventListener("click", () => openPopup(popupAdd));
 buttonCloseAddPopup.addEventListener("click", () => closePopup(popupAdd));
+export {config, photoPopup, openPopup};
