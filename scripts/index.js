@@ -99,8 +99,9 @@ function addPlaceForm(evt) {
   elements.prepend(card);
   closePopup(popupAdd);
   formAdd.reset();
-  buttonSubmit.classList.add('popup__submit_unactive');
-  buttonSubmit.setAttribute('disabled', true);
+  validateCardForm.disableSubmitButton(buttonSubmit);
+  //buttonSubmit.classList.add('popup__submit_unactive');
+  //buttonSubmit.setAttribute('disabled', true);
   //disableSubmitButton (buttonSubmit);
 }
 
