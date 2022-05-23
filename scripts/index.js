@@ -1,5 +1,6 @@
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
+import {photoPopup, openPopup, closePopup} from './popup.js'
 
 
 //...........................Код отвечает за изменение информации о пользователе..............................................
@@ -14,7 +15,6 @@ const nameInput = formEdit.querySelector("#nameInput");
 const jobInput = formEdit.querySelector("#jobInput");
 const elements = document.querySelector(".elements"); //елемент не в единственном числе, это блок куда добавляются элементы, потому и назвал его
 //"Элементы". поnому что туда добавялются элементы из темплейта. Если я ошибаюсь, то какое имя ему нужно задать, чтобы не сбивать при этом с толку
-const photoPopup = document.querySelector("#photoPopup");
 const buttonClosePhotoPopup = photoPopup.querySelector(".popup__close");
 const buttonOpenAddPopup = profile.querySelector(".profile__add-button");
 const popupAdd = document.querySelector("#popupAdd"); //Попап добавления картинки
@@ -53,23 +53,8 @@ const setClosePopup = () => {
   })
 }
 setClosePopup ();
-//....................Функция закрытия попапа по нажатию на Esc........................
-const closePopupEsc = (evt) => {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-    }
-  }
+//......Функци открытия и закрытия попапов перенесены в popups....................
 
-////..........функции открытия и закрытия Попапов........
-function closePopup(popupName) {
-  document.removeEventListener('keyup', closePopupEsc)
-  popupName.classList.remove("popup_opened");
-}
-function openPopup(popupName) {
-  document.addEventListener('keyup', closePopupEsc)
-  popupName.classList.add("popup_opened");
-}
 //.....Открыть попап редактирования профиля......
 function openEditPopup() {
   nameInput.value = name.textContent;
@@ -107,9 +92,6 @@ function addPlaceForm(evt) {
   closePopup(popupAdd);
   formAdd.reset();
   validateCardForm.disableSubmitButton(buttonSubmit);
-  //buttonSubmit.classList.add('popup__submit_unactive');
-  //buttonSubmit.setAttribute('disabled', true);
-  //disableSubmitButton (buttonSubmit);
 }
 
 render();
@@ -121,4 +103,4 @@ buttonOpenProfileEdit.addEventListener("click", openEditPopup);
 buttonCloseEditPopup.addEventListener("click", () => closePopup(popupEdit));
 buttonOpenAddPopup.addEventListener("click", () => openPopup(popupAdd));
 buttonCloseAddPopup.addEventListener("click", () => closePopup(popupAdd));
-export {config, photoPopup, openPopup};
+export {config};

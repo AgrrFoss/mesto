@@ -1,4 +1,4 @@
-import {photoPopup, openPopup} from './index.js'
+import {photoPopup, popupImage, popupTitle, openPopup} from './popup.js'
 export  default class Card {
     constructor (data, cardTemplate){
     this._link = data.link;
@@ -18,9 +18,10 @@ export  default class Card {
     getCard () {
       this._element = this._getTemplate ();
       this._setEventListeners();
-      this._element.querySelector('.element__image').src = this._link;
+      const _image = this._element.querySelector('.element__image');
+      _image.src = this._link;
       this._element.querySelector('.element__title').textContent = this._name;
-      this._element.querySelector('.element__image').alt = this._name;  
+      _image.alt = this._name;  
       return this._element;
     }
 
@@ -47,9 +48,7 @@ export  default class Card {
     }
     
     _handleViewImage () {
-      const popupImage = photoPopup.querySelector(".popup__image");
-      const popupTitle = photoPopup.querySelector(".popup__image-name");
-      popupImage.src = this._link;
+     popupImage.src = this._link;
       popupImage.alt = this._name;
       popupTitle.textContent = this._name;
       openPopup(photoPopup);
