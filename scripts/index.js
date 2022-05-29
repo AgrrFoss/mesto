@@ -1,6 +1,6 @@
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
-import {photoPopup, openPopup, closePopup} from './popup.js'
+import {photoPopup, openPopup, closePopup} from './Popup.js'
 
 
 //...........................Код отвечает за изменение информации о пользователе..............................................

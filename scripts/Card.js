@@ -1,4 +1,4 @@
-import {photoPopup, popupImage, popupTitle, openPopup} from './popup.js'
+import {photoPopup, popupImage, popupTitle, openPopup} from './Popup.js'
 export  default class Card {
     constructor (data, cardTemplate){
     this._link = data.link;
