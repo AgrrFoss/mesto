@@ -6,8 +6,8 @@ export const editForm = popupEdit.querySelector('.popup__form')
 const popupAdd = document.querySelector("#popupAdd"); //Попап добавления картинки
 export const cardForm = popupAdd.querySelector('.popup__form');
 export const profile = document.querySelector(".profile");
-// export const name = profile.querySelector(".profile__title");
-// export const job = profile.querySelector(".profile__desc");
+export const buttonOpenProfileEdit = profile.querySelector(".profile__edit");
+export const buttonOpenAddPopup = profile.querySelector(".profile__add-button");
 
 
 export const initialCards = [

@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Learning progect",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AgrrFoss/mesto.git"
+  },
+  "author": "Orlov Gregori",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AgrrFoss/mesto/issues"
+  },
+  "homepage": "https://github.com/AgrrFoss/mesto#readme"
+}
