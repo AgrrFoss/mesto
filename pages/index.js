@@ -5,7 +5,7 @@ import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js'
 // import {photoPopup, openPopup, closePopup} from '../components/Popup.js'
 import {initialCards, editForm, cardForm, buttonOpenAddPopup, buttonOpenProfileEdit} from '../utils/constants.js'
-
+import './index.css'
 const config = {
   input: '.popup__input',
   submit: '.popup__submit',

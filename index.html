@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/index.css">
   <title>Mesto - для ваших фотографий</title>
 </head>
 <body class="page">
     <header class="header">
-        <img class="header__logo" src="images/logo.svg" alt="логотип">
+        <img class="header__logo" src="<%=require('images/logo.svg')%>"  alt="логотип">
     </header>
     <main class="content">
         <section class="profile">
-            <img class="profile__ava" src="images/Kusto.png" alt="Аватар пользователя">
+            <img class="profile__ava" src="<%=require('images/Kusto.png')%>" alt="Аватар пользователя">
               <div class="profile__name">
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
                 <button type="button" class="profile__edit" aria-label="редактировать профиль"></button>
