@@ -1,4 +1,5 @@
-import {photoPopup, popupImage, popupTitle, openPopup} from './Popup.js'
+//import {photoPopup, popupImage, popupTitle, openPopup} from './Popup.js'
+import PopupWithImage from './PopupWithImage.js';
 export  default class Card {
     constructor (data, cardTemplate){
     this._link = data.link;
@@ -19,8 +20,9 @@ export  default class Card {
       this._element = this._getTemplate ();
       this._setEventListeners();
       const _image = this._element.querySelector('.element__image');
+      const _title = this._element.querySelector('.element__title');
       _image.src = this._link;
-      this._element.querySelector('.element__title').textContent = this._name;
+      _title.textContent = this._name;
       _image.alt = this._name;  
       return this._element;
     }
@@ -48,9 +50,11 @@ export  default class Card {
     }
     
     _handleViewImage () {
-     popupImage.src = this._link;
-      popupImage.alt = this._name;
-      popupTitle.textContent = this._name;
-      openPopup(photoPopup);
+     // popupImage.src = this._link;
+     // popupImage.alt = this._name;
+     // popupTitle.textContent = this._name;
+     // openPopup(photoPopup);
+
+      return new PopupWithImage ('#photoPopup', this._link, this._name).openPopup ();
     }
 }
