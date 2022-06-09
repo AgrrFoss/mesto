@@ -33,8 +33,7 @@ export default class PopupWithForm extends Popup {
     /**Перезаписывает родительский метод close, так как при закрытии
     попапа форма должна ещё и сбрасываться.*/
     closePopup () {
-      this._popup.classList.remove("popup_opened");
-      document.removeEventListener('keyup', this._handleEscClose);
+      super.closePopup ()
       this._form.reset();
     };
 };

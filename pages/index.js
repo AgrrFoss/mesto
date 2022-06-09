@@ -6,6 +6,7 @@ import FormValidator from '../components/FormValidator.js'
 // import {photoPopup, openPopup, closePopup} from '../components/Popup.js'
 import {initialCards, editForm, cardForm, buttonOpenAddPopup, buttonOpenProfileEdit} from '../utils/constants.js'
 import './index.css'
+import PopupWithImage from '../components/PopupWithImage.js';
 const config = {
   input: '.popup__input',
   submit: '.popup__submit',
@@ -76,7 +77,12 @@ const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
 
 cardAdd.setEventListeners();
 
+// ...............проверить.......
+//const popupWithImage = new PopupWithImage;
+//popupWithImage.setEventListeners;
+
 section.rendererItems();
+
 
 
   buttonOpenProfileEdit.addEventListener("click", () => openEditForm());

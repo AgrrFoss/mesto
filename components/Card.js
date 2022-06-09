@@ -1,5 +1,5 @@
-//import {photoPopup, popupImage, popupTitle, openPopup} from './Popup.js'
-import PopupWithImage from './PopupWithImage.js';
+import PopupWithImage from "./PopupWithImage";
+
 export  default class Card {
     constructor (data, cardTemplate){
     this._link = data.link;
@@ -50,11 +50,7 @@ export  default class Card {
     }
     
     _handleViewImage () {
-     // popupImage.src = this._link;
-     // popupImage.alt = this._name;
-     // popupTitle.textContent = this._name;
-     // openPopup(photoPopup);
-
+   
       return new PopupWithImage ('#photoPopup', this._link, this._name).openPopup ();
     }
 }

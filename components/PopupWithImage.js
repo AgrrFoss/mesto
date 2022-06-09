@@ -1,5 +1,5 @@
 import Popup from './Popup.js';
-import {photoPopup, popupImage, popupTitle} from '../utils/constants.js';
+//import {photoPopup, popupImage, popupTitle} from '../utils/constants.js';
 
 /*Создайте класс PopupWithImage, который наследует от Popup. Этот класс должен перезаписывать родительский метод open.
  В методе open класса PopupWithImage нужно вставлять в попап картинку с src изображения и подписью к картинке. */
@@ -14,10 +14,9 @@ export default class PopupWithImage extends Popup {
 
     openPopup () {
         this.setEventListeners();
-        document.addEventListener('keyup', this._handleEscClose);
         this._image.src = this._link//ссылка на изображение.
         this._image.alt = this._name//ссылка на изображение.
         this._title.textContent = this._name//подпись карточки.
-        this._popup.classList.add("popup_opened");
+        super.openPopup()
       };
 };
