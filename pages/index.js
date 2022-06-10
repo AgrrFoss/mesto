@@ -6,14 +6,14 @@ import FormValidator from '../components/FormValidator.js'
 import {initialCards, editForm, cardForm, buttonOpenAddPopup, buttonOpenProfileEdit} from '../utils/constants.js'
 import './index.css'
 import PopupWithImage from '../components/PopupWithImage.js';
-const config = {
-  input: '.popup__input',
-  submit: '.popup__submit',
-  buttonUnactive: 'popup__submit_unactive',
-  inputClassError: 'popup__input_type_error',
-  errorClass: 'popup__input-error'
-}
-
+export const config = {
+   input: '.popup__input',
+   submit: '.popup__submit',
+   buttonUnactive: 'popup__submit_unactive',
+   inputClassError: 'popup__input_type_error',
+   errorClass: 'popup__input-error'
+ }
+ export 
 
 //Валлидация формы добавления карточки
 const validateCardForm = new FormValidator(cardForm, config);
@@ -40,6 +40,10 @@ function openEditForm () {
   profileForm.openPopup()
 }
 
+const popupWithImage = new PopupWithImage('#photoPopup');
+popupWithImage.setEventListeners();
+console.log(popupWithImage)
+
 /**Создание и наполнение section
  * Функция отвечает за создание карточки из объекта, переданного в data.
  * @param {*} data Получает объект из которого берется ссылка и подпись карточки.
@@ -47,7 +51,7 @@ function openEditForm () {
  * @returns возвращает карточку методом getCard класса кард.
  */
 function createCard (data) {
-  const newCard = new Card (data, '#elementTemplate');
+  const newCard = new Card (data, '#elementTemplate', popupWithImage.openPopup);
   return newCard.getCard();
 }
 /**
@@ -81,8 +85,7 @@ function openCardForm () {
 
 cardAdd.setEventListeners();
 
-const popupWithImage = new PopupWithImage('#photoPopup');
-popupWithImage.setEventListeners();
+
 
 section.rendererItems();
 
@@ -90,4 +93,4 @@ section.rendererItems();
 
   buttonOpenProfileEdit.addEventListener("click", () => openEditForm());
   buttonOpenAddPopup.addEventListener("click", () => openCardForm());
-export {config};
+ 

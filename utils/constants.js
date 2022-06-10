@@ -8,8 +8,15 @@ export const cardForm = popupAdd.querySelector('.popup__form');
 export const profile = document.querySelector(".profile");
 export const buttonOpenProfileEdit = profile.querySelector(".profile__edit");
 export const buttonOpenAddPopup = profile.querySelector(".profile__add-button");
-
-
+/*
+export const config = {
+     input: '.popup__input',
+     submit: '.popup__submit',
+     buttonUnactive: 'popup__submit_unactive',
+     inputClassError: 'popup__input_type_error',
+     errorClass: 'popup__input-error'
+    };
+*/
 export const initialCards = [
     {
       name: "Архыз",

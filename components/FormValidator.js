@@ -1,4 +1,5 @@
-import {config} from "../pages/index";
+import {config} from '../pages/index'
+
 export  default class FormValidator {
     constructor (form, config) {
         this._formElement = form,

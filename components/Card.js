@@ -1,10 +1,11 @@
 import PopupWithImage from "./PopupWithImage";
 
 export  default class Card {
-    constructor (data, cardTemplate){
+    constructor (data, cardTemplate, openCard){
     this._link = data.link;
     this._name = data.name;
     this._cardTemplate = cardTemplate;
+    this._handleViewImage = openCard;
     }
 
     _getTemplate () {
@@ -34,7 +35,7 @@ export  default class Card {
       this._element.querySelector('.element__like')
       .addEventListener('click', () => {this._handleLikeClick ();
       });
-      this._element.querySelector('.element__image').addEventListener('click', () => {this._handleViewImage ();
+      this._element.querySelector('.element__image').addEventListener('click', () => {this._handleViewImage (this._link, this._name);
       });
       
     }
@@ -47,10 +48,5 @@ export  default class Card {
     _handleDeleteCard () {
       this._element.remove();
       this._element = null;
-    }
-    
-    _handleViewImage () {
-   
-      return new PopupWithImage ('#photoPopup', this._link, this._name).openPopup ();
     }
 }
