@@ -1,5 +1,3 @@
-import PopupWithImage from "./PopupWithImage";
-
 export  default class Card {
     constructor (data, cardTemplate, openCard){
     this._link = data.link;

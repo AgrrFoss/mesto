@@ -3,9 +3,10 @@ import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js'
-import {initialCards, editForm, cardForm, buttonOpenAddPopup, buttonOpenProfileEdit} from '../utils/constants.js'
+import {initialCards, editForm, cardForm, buttonOpenAddPopup, buttonOpenProfileEdit, config} from '../utils/constants.js'
 import './index.css'
 import PopupWithImage from '../components/PopupWithImage.js';
+/*
 export const config = {
    input: '.popup__input',
    submit: '.popup__submit',
@@ -13,7 +14,7 @@ export const config = {
    inputClassError: 'popup__input_type_error',
    errorClass: 'popup__input-error'
  }
- export 
+*/
 
 //Валлидация формы добавления карточки
 const validateCardForm = new FormValidator(cardForm, config);
@@ -51,7 +52,7 @@ console.log(popupWithImage)
  * @returns возвращает карточку методом getCard класса кард.
  */
 function createCard (data) {
-  const newCard = new Card (data, '#elementTemplate', popupWithImage.openPopup);
+  const newCard = new Card (data, '#elementTemplate', (name, link) =>  popupWithImage.openPopup(name, link));
   return newCard.getCard();
 }
 /**

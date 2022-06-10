@@ -1,5 +1,3 @@
-import {config} from '../pages/index'
-
 export  default class FormValidator {
     constructor (form, config) {
         this._formElement = form,
@@ -7,6 +5,7 @@ export  default class FormValidator {
     }
 
     disableSubmitButton (_buttonElement) {
+      console.log(this._config)
         _buttonElement.classList.add(this._config.buttonUnactive);
         _buttonElement.setAttribute('disabled', true);
     }
@@ -44,7 +43,7 @@ export  default class FormValidator {
           this.disableSubmitButton (_buttonElement);
         } else {
           _buttonElement.removeAttribute('disabled', true);
-          _buttonElement.classList.remove(config.buttonUnactive);
+          _buttonElement.classList.remove(this._config.buttonUnactive);
         }
       }
 
