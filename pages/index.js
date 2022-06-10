@@ -3,7 +3,6 @@ import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js'
-// import {photoPopup, openPopup, closePopup} from '../components/Popup.js'
 import {initialCards, editForm, cardForm, buttonOpenAddPopup, buttonOpenProfileEdit} from '../utils/constants.js'
 import './index.css'
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -75,16 +74,20 @@ const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
   cardAdd.closePopup ()
 });
 
+function openCardForm () {
+  validateCardForm.enableValidation();
+  cardAdd.openPopup()
+}
+
 cardAdd.setEventListeners();
 
-// ...............проверить.......
-//const popupWithImage = new PopupWithImage;
-//popupWithImage.setEventListeners;
+const popupWithImage = new PopupWithImage('#photoPopup');
+popupWithImage.setEventListeners();
 
 section.rendererItems();
 
 
 
   buttonOpenProfileEdit.addEventListener("click", () => openEditForm());
-  buttonOpenAddPopup.addEventListener("click", () => cardAdd.openPopup());
+  buttonOpenAddPopup.addEventListener("click", () => openCardForm());
 export {config};

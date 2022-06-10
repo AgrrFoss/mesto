@@ -23,7 +23,6 @@ export default class PopupWithForm extends Popup {
     /** Добавляет не только закрыте попапа, но и обработчик кнопки submit*/
     setEventListeners() {
       super.setEventListeners()
-
       this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._submitHandler(this._getInputValues());

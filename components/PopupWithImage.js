@@ -13,7 +13,6 @@ export default class PopupWithImage extends Popup {
     };
 
     openPopup () {
-        this.setEventListeners();
         this._image.src = this._link//ссылка на изображение.
         this._image.alt = this._name//ссылка на изображение.
         this._title.textContent = this._name//подпись карточки.
