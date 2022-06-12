@@ -11,8 +11,6 @@ export default class PopupWithImage extends Popup {
     };
 
     openPopup (link, name) {
-        console.log(name, link);
-     //   console.log(this._popup);
         this._image.src = link//ссылка на изображение.
         this._image.alt = name//ссылка на изображение.
         this._title.textContent = name//подпись карточки.

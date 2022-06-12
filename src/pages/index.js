@@ -6,15 +6,7 @@ import FormValidator from '../components/FormValidator.js'
 import {initialCards, editForm, cardForm, buttonOpenAddPopup, buttonOpenProfileEdit, config} from '../utils/constants.js'
 import './index.css'
 import PopupWithImage from '../components/PopupWithImage.js';
-/*
-export const config = {
-   input: '.popup__input',
-   submit: '.popup__submit',
-   buttonUnactive: 'popup__submit_unactive',
-   inputClassError: 'popup__input_type_error',
-   errorClass: 'popup__input-error'
- }
-*/
+
 
 //Валлидация формы добавления карточки
 const validateCardForm = new FormValidator(cardForm, config);
