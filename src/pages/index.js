@@ -7,6 +7,38 @@ import {initialCards, editForm, cardForm, buttonOpenAddPopup, buttonOpenProfileE
 import './index.css'
 import PopupWithImage from '../components/PopupWithImage.js';
 
+/*
+Токен: 5df93b18-5437-4244-a6a2-8b097c8cb05f
+Идентификатор группы: cohort-43
+*/
+/**запрос информации о пользователе */
+fetch('https://nomoreparties.co/v1/cohort-43/users/me', {
+  method: 'GET',
+  headers: {
+    authorization: '5df93b18-5437-4244-a6a2-8b097c8cb05f'
+  } 
+})
+.then(res => res.json())
+.then((result) => {
+  const userInfoOnline =  result;
+  console.log(userInfoOnline);
+  return userInfoOnline;
+});
+
+/** Запрос карточек */
+fetch('https://mesto.nomoreparties.co/v1/cohort-43/cards', {
+  method: 'GET',
+  headers: {
+    authorization: '5df93b18-5437-4244-a6a2-8b097c8cb05f'
+  } 
+})
+.then(res => res.json())
+.then((result) => {
+  const cardsOnline =  result;
+  console.log(cardsOnline);
+  return cardsOnline;
+});
+
 
 //Валлидация формы добавления карточки
 const validateCardForm = new FormValidator(cardForm, config);
