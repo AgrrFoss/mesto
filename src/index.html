@@ -61,6 +61,26 @@
       </div>
     </div>
 
+    <!---Попап изменения аватарки-->
+    <div class="popup" id="popupAva">
+      <div class="popup__container">
+        <form class="popup__form" name="edit-ava-form" novalidate>
+          <button class="popup__close" type="button"></button>
+          <h3 class="popup__title">Обновить аватар</h3>
+          <input
+          type="url" 
+          class="popup__input" 
+          id='avaLink' 
+          name="avaLink" 
+          value="" 
+          placeholder="Ссылка на картинку" 
+          required>
+          <span class="avaLink-error"></span>
+          <button type="submit" class="popup__submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
 
     <!---Попап добавления карточки-->
     <div class="popup" id="popupAdd">
@@ -93,6 +113,17 @@
         </form>
       </div>
     </div>
+
+    <!---Попап удаления карточки-->
+    <div class="popup" id="popupDelete">
+      <div class="popup__container">
+        <form class="popup__form" name="delete-place-form" novalidate>
+          <button class="popup__close" type="button"></button>
+          <h3 class="popup__title">вы уверены?</h3>
+          <button type="submit" class="popup__submit">Да</button>
+        </form>
+      </div>
+    </div>
     
     <!---Попап с фотографией-->
     <div class="popup popup_dart-bg" id="photoPopup">
@@ -109,7 +140,10 @@
         <div class="element__delete"></div>
         <div class="element__name-block">
           <h2 class="element__title"></h2>
+          <div class="element__like-block">
           <button type="button" class="element__like"></button>
+          <p class="element__like-counter">1</p>
+          <div>
         </div>
       </li>
     </template>
