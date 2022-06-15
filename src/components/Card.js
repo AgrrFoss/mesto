@@ -2,6 +2,7 @@ export  default class Card {
     constructor (data, cardTemplate, openCard){
     this._link = data.link;
     this._name = data.name;
+    this._likes = data.likes;
     this._cardTemplate = cardTemplate;
     this._handleViewImage = openCard;
     }
@@ -20,9 +21,11 @@ export  default class Card {
       this._setEventListeners();
       const _image = this._element.querySelector('.element__image');
       const _title = this._element.querySelector('.element__title');
+      const _likeCounter = this._element.querySelector('.element__like-counter')
       _image.src = this._link;
       _title.textContent = this._name;
       _image.alt = this._name;  
+      _likeCounter.textContent = this._likes.length
       return this._element;
     }
 
