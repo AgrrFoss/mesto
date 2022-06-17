@@ -28,7 +28,7 @@ export default class Section {
   * Cодержит публичный метод addItem, который принимает DOM-элемент и добавляет его в контейнер.
   */
     addItem(card) {
-        this._container.prepend(card)
+        this._container.append(card)
     }
 }
 

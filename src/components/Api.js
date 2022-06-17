@@ -63,4 +63,25 @@ export default class Api {
             console.log(err)
         })
     }
+    /** отправляет запрос, касающийся лайка карточки
+     * @param {*} cardId первый параметр: id карточки
+     * @param {*} like второй параметр: функция определяющая поставлен ли лайк на карточке
+     * @returns 
+     */
+    likeCard(cardId, like) {
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
+            method: like ? 'DELETE' : 'PUT',
+            headers: this._headers
+        })
+        .then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+        })
+        .catch ((err) => {
+            console.log(err)
+        })
+    }
+
+    
 }

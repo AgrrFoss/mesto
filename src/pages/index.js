@@ -14,20 +14,15 @@ validateCardForm.enableValidation();
 // Валидация формы изменения профиля
 const validateEditForm = new FormValidator(editForm, config);
 validateEditForm.enableValidation();
-
+// Валидация формы изменения Аватарки
 const validateAvaForm = new FormValidator(avaForm, config);
 validateAvaForm.enableValidation();
 
-
-
 const api = new Api ('https://mesto.nomoreparties.co/v1/cohort-43', '5df93b18-5437-4244-a6a2-8b097c8cb05f')
-
 const user = new UserInfo ({userNameSelector: '.profile__title', UserJobSelector: '.profile__desc'});
-
 
 api.getUserInfo('/users/me')
   .then((result) => {
-    console.log(result)
     user.setUserInfo ({userName: result.name, userJob: result.about, userAva: result.avatar});
   });
 
@@ -36,22 +31,24 @@ api.getUserInfo('/users/me')
     name: inputsData.name,
     about: inputsData.job
   };
-  console.log(userObj)
   api.postUserInfo ('/users/me', userObj)
- // user.setUserInfo ({userName: inputsData.name, userJob: inputsData.job});
+  .then((result) => {
+    user.setUserInfo ({userName: result.name, userJob: result.about, userAva: result.avatar});
+  });
   profileForm.closePopup ()
 });
-
 profileForm.setEventListeners();
 
 const avatarForm = new PopupWithForm ('#popupAva', (inputsData) => {
   const newAva = {
     avatar: inputsData.avaLink
   }
-  console.log(newAva)
   api.postUserInfo ('/users/me/avatar', newAva)
+  .then ((result) => {
+    avatar.src = result.avatar
+    avatarForm.closePopup();
+  });
 })
-
 avatarForm.setEventListeners();
 
 function openEditForm () {
@@ -64,6 +61,13 @@ function openEditForm () {
 const popupWithImage = new PopupWithImage('#photoPopup');
 popupWithImage.setEventListeners();
 
+function sendLikeCard (idCard, isLike, likeNow) {
+  api.likeCard(idCard, isLike, likeNow)
+    .then((result) => {
+    })
+}
+
+
 /**Создание и наполнение section
  * Функция отвечает за создание карточки из объекта, переданного в data.
  * @param {*} data Получает объект из которого берется ссылка и подпись карточки.
@@ -71,31 +75,29 @@ popupWithImage.setEventListeners();
  * @returns возвращает карточку методом getCard класса кард.
  */
 function createCard (data) {
-  const newCard = new Card (data, '#elementTemplate', (name, link) =>  popupWithImage.openPopup(name, link));
+  const newCard = new Card (data, '#elementTemplate', (name, link) =>  popupWithImage.openPopup(name, link),  sendLikeCard);
   return newCard.getCard();
 }
 
+
 api.getCard ('/cards')
     .then((result) => {
-      console.log(result[2])
-      const section1 = new Section ({items: result, renderer: (data) => {
-        section1.addItem(createCard(data));
+      console.log(result)
+      const section = new Section ({items: result, renderer: (data) => {
+        section.addItem(createCard(data));
       }
       },
       '.elements'
       );
-      section1.rendererItems()
+      section.rendererItems()
     })
-
-
-
 
 const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
   const placeObj = {
     name: data.placeName,
     link: data.link
   };
-  api.postCard ('/cards', placeObj);
+  api.postCard ('/cards', placeObj)
   cardAdd.closePopup ()
 });
 
