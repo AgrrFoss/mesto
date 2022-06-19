@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
     constructor (popupSelector, submitHandler) {
         super (popupSelector);
       this._form = this._popup.querySelector('.popup__form');
+      this._submitButton = this._form.querySelector('.popup__submit')
       this._submitHandler = submitHandler; 
       this._inputList = Array.from(this._form.querySelectorAll('.popup__input'));
     };
@@ -19,6 +20,11 @@ export default class PopupWithForm extends Popup {
       }, {});
       return inputsData;
     };
+
+    veiwLoad(text) {
+      this._submitButton.textContent = text      
+    }
+
     /** Добавляет не только закрыте попапа, но и обработчик кнопки submit*/
     setEventListeners() {
       super.setEventListeners()

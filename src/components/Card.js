@@ -50,10 +50,11 @@ export  default class Card {
 
     _setEventListeners () {
       this._element.querySelector('.element__delete')
-      .addEventListener('click', () => {this._deleteCard ();
+      .addEventListener('click', () => {this._handleDeleteCard(this);
       });
+     
       this._element.querySelector('.element__like')
-      .addEventListener('click', () => {this.handleLikeClick ();
+      .addEventListener('click', () => {this._handleLikeImage(this);
       });
       this._element.querySelector('.element__image').addEventListener('click', () => {this._handleViewImage (this._link, this._name);
       });
@@ -65,20 +66,13 @@ export  default class Card {
     return Boolean(Array.from(this.likes).find(item => item._id === this._userId));
     }
 
-  handleLikeClick () {
+  changeLike () {
     this._element.querySelector('.element__like')
     .classList.toggle("element__like_active");
-    console.log(this.isLiked())
-    this._handleLikeImage(this)   //(this._id,  this.isLiked());
   }
 
-_deleteCard () {
-  this._handleDeleteCard(this._id)
-  
+  deleteCardFromDOM () {
+    this._element.remove();
+    this._element = null;
   }
-
-deleteCardFromDOM () {
-  this._element.remove();
-  this._element = null;
-}
 }

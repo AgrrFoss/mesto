@@ -1,5 +1,4 @@
 import Card from '../components/Card.js'
-import Section from '../components/Section.js';
 import Section2 from '../components/Section2.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
@@ -23,12 +22,16 @@ validateAvaForm.enableValidation();
 const api = new Api ('https://mesto.nomoreparties.co/v1/cohort-43', '5df93b18-5437-4244-a6a2-8b097c8cb05f')
 const user = new UserInfo ({userNameSelector: '.profile__title', UserJobSelector: '.profile__desc'});
 
+
+
+
 api.getUserInfo('/users/me')
   .then((result) => {
     user.setUserInfo ({userName: result.name, userJob: result.about, userAva: result.avatar});
   });
 
  const profileForm = new PopupWithForm ('#popupEdit', (inputsData) => {
+  profileForm.veiwLoad('Сохранение')
   const userObj = {
     name: inputsData.name,
     about: inputsData.job
@@ -36,12 +39,20 @@ api.getUserInfo('/users/me')
   api.postUserInfo ('/users/me', userObj)
   .then((result) => {
     user.setUserInfo ({userName: result.name, userJob: result.about, userAva: result.avatar});
-  });
-  profileForm.closePopup ()
+  })
+  .finally(() => {
+    profileForm.veiwLoad('Сохранить')
+  })
+  profileForm.closePopup ();
 });
+
 profileForm.setEventListeners();
 
+
+
+
 const avatarForm = new PopupWithForm ('#popupAva', (inputsData) => {
+  avatarForm.veiwLoad('Сохранение')
   const newAva = {
     avatar: inputsData.avaLink
   }
@@ -49,7 +60,10 @@ const avatarForm = new PopupWithForm ('#popupAva', (inputsData) => {
   .then ((result) => {
     avatar.src = result.avatar
     avatarForm.closePopup();
-  });
+  })
+  .finally(() => {
+    avatarForm.veiwLoad('Сохранить')
+  })
 })
 avatarForm.setEventListeners();
 
@@ -69,25 +83,17 @@ function sendLikeCard (thisCard) {
       console.log(result.likes)
       thisCard.addLikeCounter(result.likes)
       thisCard.likes = result.likes;
+      thisCard.changeLike ()
     })
+    .catch(err => console.log(err))
 }
 
 
 
 const popupWithConfirmation = new PopupWithConfirmation ('#popupDelete')
 console.log(popupWithConfirmation)
-/*
-function deleteCard(thisCard) {
-  popupWithConfirmation.openPopup();
-  popupWithConfirmation.setEventListeners((thisCard) => {
-    api.deleteCard(thisCard._id)
-    
-  })
-}
 
-*/
 
-// .................................допилилваем функцию удаления.........................................
 
 /**Создание и наполнение section
  * Функция отвечает за создание карточки из объекта, переданного в data.
@@ -96,10 +102,12 @@ function deleteCard(thisCard) {
  * @returns возвращает карточку методом getCard класса кард.
  */
 function createCard (data) {
-  const newCard = new Card (data, '#elementTemplate', (name, link) =>  popupWithImage.openPopup(name, link),  sendLikeCard, (cardId) => {
+  const newCard = new Card (data, '#elementTemplate', (name, link) =>  popupWithImage.openPopup(name, link),  sendLikeCard,
+  () => {
     popupWithConfirmation.openPopup();
-    popupWithConfirmation.setEventListeners((cardId) => {
-      api.deleteCard(cardId)
+    popupWithConfirmation.setEventListeners(() => {
+      api.deleteCard(data._id)
+       .then (newCard.deleteCardFromDOM())
     })
   });
   return newCard.getCard();
@@ -115,24 +123,9 @@ api.getCard ('/cards')
       });
     });
 
-/* Старый код рендеринга карточек
-
-api.getCard ('/cards')
-    .then((result) => {
-      console.log(result)
-      const section = new Section ({items: result, renderer: (data) => {
-        section.addItem(createCard(data));
-      }
-      },
-      '.elements'
-      );
-      section.rendererItems()
-    })
-*/
-
-
 
 const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
+  cardAdd.veiwLoad('Сохранение')
   const placeObj = {
     name: data.placeName,
     link: data.link
@@ -140,13 +133,10 @@ const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
   api.postCard ('/cards', placeObj)
     .then((result) => {
       const newCard = createCard(result);
-      console.log(newCard)
-      //.............НАйти тут ошибку не позволяющую выложить карточку.............................
-      console.log(section2)
-      console.log(section2.addItem)
-      console.log(section2.addItem(newCard))
-
-      section2.addItem(newCard);
+      section2.addNewCard(newCard);
+    })
+    .finally(() => {
+      cardAdd.veiwLoad('Создать')
     })
   cardAdd.closePopup ()
 });
