@@ -9,6 +9,7 @@ export const profile = document.querySelector(".profile");
 export const buttonOpenProfileEdit = profile.querySelector(".profile__edit");
 export const buttonOpenAddPopup = profile.querySelector(".profile__add-button");
 export const avatar = profile.querySelector('.profile__ava');
+export const avaEdit = profile.querySelector('.profile__ava-edit');
 export const avaForm = document.querySelector('#popupAva .popup__form')
 
 export const config = {

@@ -3,7 +3,7 @@ import Section2 from '../components/Section2.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js'
-import {initialCards, editForm, cardForm, buttonOpenAddPopup, buttonOpenProfileEdit, config, avatar, avaForm} from '../utils/constants.js'
+import {initialCards, editForm, cardForm, buttonOpenAddPopup, buttonOpenProfileEdit, config, avatar, avaEdit, avaForm} from '../utils/constants.js'
 import './index.css'
 import PopupWithImage from '../components/PopupWithImage.js';
 import Api from '../components/Api.js';
@@ -150,7 +150,7 @@ function openCardForm () {
 cardAdd.setEventListeners();
 
 
-avatar.addEventListener('click', () => avatarForm.openPopup())
+avaEdit.addEventListener('click', () => avatarForm.openPopup())
 buttonOpenProfileEdit.addEventListener("click", () => openEditForm());
 buttonOpenAddPopup.addEventListener("click", () => openCardForm());
  
