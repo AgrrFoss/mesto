@@ -1,8 +1,7 @@
 import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
-  /**
-   * 
+  /** Класс создает попап с формой
    * @param {*} popupSelector Передать в конструктор Селектор popup
    * @param {*} submitHandler Функция описывающая Submit
    */

@@ -1,14 +1,15 @@
 export  default class Card {
-    constructor (data, cardTemplate, openCard, likeCard){
+    constructor (data, cardTemplate, openCard, likeCard, deleteCard){
     this._link = data.link;
     this._name = data.name;
     this._id = data._id;
-    this._likes = data.likes;
+    this.likes = data.likes;
     this._userId = 'b9b7acc38d7000eebabc5bed'
     this._ownerId = data.owner._id;
     this._cardTemplate = cardTemplate;
     this._handleViewImage = openCard;
     this._handleLikeImage = likeCard;
+    this._handleDeleteCard = deleteCard;
     }
 
     _getTemplate () {
@@ -20,6 +21,7 @@ export  default class Card {
         return elementPlace;
     }
 
+
     getCard () {
       this._element = this._getTemplate ();
       this._setEventListeners();
@@ -29,7 +31,7 @@ export  default class Card {
       _image.src = this._link;
       _title.textContent = this._name;
       _image.alt = this._name;  
-      this.addLikeCounter (this._likes)
+      this.addLikeCounter (this.likes)
       //_likeCounter.textContent = this._likes.length;
       if (this._ownerId !== this._userId){
         this._element.removeChild(this._element.querySelector('.element__delete'))}
@@ -38,7 +40,9 @@ export  default class Card {
       }
       return this._element;
     }
-
+    /**функция меняет данные счетчика
+     * @param {*} likes принимает на вход массив с лайкнувшими пользователями
+     */
     addLikeCounter (likes) {
       const _likeCounter = this._element.querySelector('.element__like-counter');
       _likeCounter.textContent = likes.length;
@@ -46,7 +50,7 @@ export  default class Card {
 
     _setEventListeners () {
       this._element.querySelector('.element__delete')
-      .addEventListener('click', () => {this._handleDeleteCard ();
+      .addEventListener('click', () => {this._deleteCard ();
       });
       this._element.querySelector('.element__like')
       .addEventListener('click', () => {this.handleLikeClick ();
@@ -58,18 +62,23 @@ export  default class Card {
 
 
   isLiked() {
-    return Boolean(Array.from(this._likes).find(item => item._id === this._userId));
+    return Boolean(Array.from(this.likes).find(item => item._id === this._userId));
     }
 
   handleLikeClick () {
     this._element.querySelector('.element__like')
     .classList.toggle("element__like_active");
     console.log(this.isLiked())
-    this._handleLikeImage(this._id,  this.isLiked());
+    this._handleLikeImage(this)   //(this._id,  this.isLiked());
   }
 
-_handleDeleteCard () {
-    this._element.remove();
-    this._element = null;
+_deleteCard () {
+  this._handleDeleteCard(this._id)
+  
   }
+
+deleteCardFromDOM () {
+  this._element.remove();
+  this._element = null;
+}
 }

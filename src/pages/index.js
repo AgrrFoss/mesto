@@ -1,5 +1,6 @@
 import Card from '../components/Card.js'
 import Section from '../components/Section.js';
+import Section2 from '../components/Section2.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js'
@@ -7,6 +8,7 @@ import {initialCards, editForm, cardForm, buttonOpenAddPopup, buttonOpenProfileE
 import './index.css'
 import PopupWithImage from '../components/PopupWithImage.js';
 import Api from '../components/Api.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
 //Валлидация формы добавления карточки
 const validateCardForm = new FormValidator(cardForm, config);
@@ -61,12 +63,31 @@ function openEditForm () {
 const popupWithImage = new PopupWithImage('#photoPopup');
 popupWithImage.setEventListeners();
 
-function sendLikeCard (idCard, isLike, likeNow) {
-  api.likeCard(idCard, isLike, likeNow)
+function sendLikeCard (thisCard) {
+  api.likeCard(thisCard._id, thisCard.isLiked())
     .then((result) => {
+      console.log(result.likes)
+      thisCard.addLikeCounter(result.likes)
+      thisCard.likes = result.likes;
     })
 }
 
+
+
+const popupWithConfirmation = new PopupWithConfirmation ('#popupDelete')
+console.log(popupWithConfirmation)
+/*
+function deleteCard(thisCard) {
+  popupWithConfirmation.openPopup();
+  popupWithConfirmation.setEventListeners((thisCard) => {
+    api.deleteCard(thisCard._id)
+    
+  })
+}
+
+*/
+
+// .................................допилилваем функцию удаления.........................................
 
 /**Создание и наполнение section
  * Функция отвечает за создание карточки из объекта, переданного в data.
@@ -75,10 +96,26 @@ function sendLikeCard (idCard, isLike, likeNow) {
  * @returns возвращает карточку методом getCard класса кард.
  */
 function createCard (data) {
-  const newCard = new Card (data, '#elementTemplate', (name, link) =>  popupWithImage.openPopup(name, link),  sendLikeCard);
+  const newCard = new Card (data, '#elementTemplate', (name, link) =>  popupWithImage.openPopup(name, link),  sendLikeCard, (cardId) => {
+    popupWithConfirmation.openPopup();
+    popupWithConfirmation.setEventListeners((cardId) => {
+      api.deleteCard(cardId)
+    })
+  });
   return newCard.getCard();
 }
 
+const section2 = new Section2 ('.elements');
+
+api.getCard ('/cards')
+    .then((result) => {
+      section2.rendererItems({items: result, renderer: (data) => {
+        section2.addItem(createCard(data));
+      }
+      });
+    });
+
+/* Старый код рендеринга карточек
 
 api.getCard ('/cards')
     .then((result) => {
@@ -91,6 +128,9 @@ api.getCard ('/cards')
       );
       section.rendererItems()
     })
+*/
+
+
 
 const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
   const placeObj = {
@@ -98,6 +138,16 @@ const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
     link: data.link
   };
   api.postCard ('/cards', placeObj)
+    .then((result) => {
+      const newCard = createCard(result);
+      console.log(newCard)
+      //.............НАйти тут ошибку не позволяющую выложить карточку.............................
+      console.log(section2)
+      console.log(section2.addItem)
+      console.log(section2.addItem(newCard))
+
+      section2.addItem(newCard);
+    })
   cardAdd.closePopup ()
 });
 
@@ -105,6 +155,7 @@ function openCardForm () {
   validateCardForm.enableValidation();
   cardAdd.openPopup()
 }
+
 
 cardAdd.setEventListeners();
 
