@@ -1,8 +1,8 @@
 .profile__ava {
     border-radius: 50%;
-    Width: 100%;
+    width: 100%;
     max-width: 120px;
-    max-height: 120px;;
+    max-height: 120px;
     margin-right: 0px;
     position: relative;
     object-fit: cover;
