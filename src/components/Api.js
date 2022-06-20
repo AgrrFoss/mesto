@@ -8,6 +8,13 @@ export default class Api {
         }
     }
 
+    _checkResponse(res) {
+        if (res.ok) {
+            return res.json()
+        }
+        return Promise.reject(`Ошибка ${res.status}`);
+    }
+
     getUserInfo (userUrl) {
         return fetch(`${this._url}${userUrl}`, {
             method: 'GET',
@@ -31,9 +38,7 @@ export default class Api {
                 return res.json()
             }
         })
-        .catch ((err) => {
-            console.log(err)
-        })
+        
     }
 
     getCard (cardsUrl) {
@@ -59,9 +64,6 @@ export default class Api {
                 return res.json()
             }
         })
-        .catch ((err) => {
-            console.log(err)
-        })
     }
     /** отправляет запрос, касающийся лайка карточки
      * @param {*} cardId первый параметр: id карточки
@@ -78,9 +80,6 @@ export default class Api {
                 return res.json()
             }
         })
-        .catch ((err) => {
-            console.log(err)
-        })
     }
 
     deleteCard(cardId) {
@@ -92,9 +91,6 @@ export default class Api {
             if (res.ok) {
                 return res.json()
             }
-        })
-        .catch ((err) => {
-            console.log(err)
         })
     }
     

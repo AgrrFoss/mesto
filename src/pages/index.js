@@ -40,6 +40,9 @@ api.getUserInfo('/users/me')
   .then((result) => {
     user.setUserInfo ({userName: result.name, userJob: result.about, userAva: result.avatar});
   })
+  .catch ((err) => {
+    console.log(err)
+})
   .finally(() => {
     profileForm.veiwLoad('Сохранить')
   })
@@ -61,6 +64,9 @@ const avatarForm = new PopupWithForm ('#popupAva', (inputsData) => {
     avatar.src = result.avatar
     avatarForm.closePopup();
   })
+  .catch ((err) => {
+    console.log(err)
+})
   .finally(() => {
     avatarForm.veiwLoad('Сохранить')
   })
@@ -108,6 +114,9 @@ function createCard (data) {
     popupWithConfirmation.setEventListeners(() => {
       api.deleteCard(data._id)
        .then (newCard.deleteCardFromDOM())
+       .catch ((err) => {
+        console.log(err)
+    })
     })
   });
   return newCard.getCard();
@@ -121,7 +130,10 @@ api.getCard ('/cards')
         section2.addItem(createCard(data));
       }
       });
-    });
+    })
+    .catch ((err) => {
+      console.log(err)
+  })
 
 
 const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
@@ -135,6 +147,9 @@ const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
       const newCard = createCard(result);
       section2.addNewCard(newCard);
     })
+    .catch ((err) => {
+      console.log(err)
+  })
     .finally(() => {
       cardAdd.veiwLoad('Создать')
     })
