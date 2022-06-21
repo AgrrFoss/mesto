@@ -9,6 +9,8 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import Api from '../components/Api.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
+let userId;
+
 //Валлидация формы добавления карточки
 const validateCardForm = new FormValidator(cardForm, config);
 validateCardForm.enableValidation();
@@ -24,11 +26,13 @@ const user = new UserInfo ({userNameSelector: '.profile__title', UserJobSelector
 
 
 
-
+/* Старый код получения данных
 api.getUserInfo('/users/me')
   .then((result) => {
+    userId =result._id
     user.setUserInfo ({userName: result.name, userJob: result.about, userAva: result.avatar});
   });
+*/
 
  const profileForm = new PopupWithForm ('#popupEdit', (inputsData) => {
   profileForm.veiwLoad('Сохранение')
@@ -38,18 +42,20 @@ api.getUserInfo('/users/me')
   };
   api.postUserInfo ('/users/me', userObj)
   .then((result) => {
+
     user.setUserInfo ({userName: result.name, userJob: result.about, userAva: result.avatar});
+    profileForm.closePopup ();
   })
+  .catch ((err) => {
+    console.log(err)
+})
   .finally(() => {
     profileForm.veiwLoad('Сохранить')
   })
-  profileForm.closePopup ();
+  
 });
 
 profileForm.setEventListeners();
-
-
-
 
 const avatarForm = new PopupWithForm ('#popupAva', (inputsData) => {
   avatarForm.veiwLoad('Сохранение')
@@ -61,6 +67,9 @@ const avatarForm = new PopupWithForm ('#popupAva', (inputsData) => {
     avatar.src = result.avatar
     avatarForm.closePopup();
   })
+  .catch ((err) => {
+    console.log(err)
+})
   .finally(() => {
     avatarForm.veiwLoad('Сохранить')
   })
@@ -88,10 +97,9 @@ function sendLikeCard (thisCard) {
     .catch(err => console.log(err))
 }
 
-
-
 const popupWithConfirmation = new PopupWithConfirmation ('#popupDelete')
 console.log(popupWithConfirmation)
+popupWithConfirmation.setEventListeners()
 
 
 
@@ -102,12 +110,15 @@ console.log(popupWithConfirmation)
  * @returns возвращает карточку методом getCard класса кард.
  */
 function createCard (data) {
-  const newCard = new Card (data, '#elementTemplate', (name, link) =>  popupWithImage.openPopup(name, link),  sendLikeCard,
+  const newCard = new Card (data, '#elementTemplate', (name, link) =>  popupWithImage.openPopup(name, link), userId,  sendLikeCard,
   () => {
     popupWithConfirmation.openPopup();
-    popupWithConfirmation.setEventListeners(() => {
+    popupWithConfirmation.setSubmitFn(() => {
       api.deleteCard(data._id)
        .then (newCard.deleteCardFromDOM())
+       .catch ((err) => {
+        console.log(err)
+    })
     })
   });
   return newCard.getCard();
@@ -115,13 +126,43 @@ function createCard (data) {
 
 const section2 = new Section2 ('.elements');
 
+
+/* старый код получения карточек
+
 api.getCard ('/cards')
     .then((result) => {
       section2.rendererItems({items: result, renderer: (data) => {
         section2.addItem(createCard(data));
       }
       });
+    })
+    .catch ((err) => {
+      console.log(err)
+  })
+*/
+
+Promise.all([api.getUserInfo('/users/me'), api.getCard ('/cards')])
+  .then((res) => {
+    const [userInfo, Cards] = res;
+    // заполнение данных пользователя
+    userId =userInfo._id
+    user.setUserInfo ({userName: userInfo.name, userJob: userInfo.about, userAva: userInfo.avatar});
+    // отрисовка карточек
+    section2.rendererItems({items: Cards, renderer: (data) => {
+      section2.addItem(createCard(data));
+    }
     });
+  })
+  .catch(err => {
+    console.log(err)
+  });
+
+
+
+
+
+
+
 
 
 const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
@@ -134,23 +175,31 @@ const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
     .then((result) => {
       const newCard = createCard(result);
       section2.addNewCard(newCard);
+      cardAdd.closePopup ()
     })
+    .catch ((err) => {
+      console.log(err)
+  })
     .finally(() => {
       cardAdd.veiwLoad('Создать')
     })
-  cardAdd.closePopup ()
+  
 });
 
 function openCardForm () {
-  validateCardForm.enableValidation();
+  validateCardForm.disableSubmitButton();
   cardAdd.openPopup()
 }
 
+function openAvaForm () {
+  validateAvaForm.disableSubmitButton();
+  avatarForm.openPopup()
+}
 
 cardAdd.setEventListeners();
 
 
-avaEdit.addEventListener('click', () => avatarForm.openPopup())
+avaEdit.addEventListener('click', () => openAvaForm())
 buttonOpenProfileEdit.addEventListener("click", () => openEditForm());
 buttonOpenAddPopup.addEventListener("click", () => openCardForm());
  
