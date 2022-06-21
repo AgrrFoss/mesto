@@ -20,11 +20,7 @@ export default class Api {
             method: 'GET',
             headers: this._headers
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-        })
+        .then(this._checkResponse)
     }
 
     postUserInfo(userUrl, userObj) {
@@ -33,11 +29,7 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify(userObj)
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-        })
+        .then(this._checkResponse)
         
     }
 
@@ -46,11 +38,7 @@ export default class Api {
             method: 'GET',
             headers: this._headers
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-        })
+        .then(this._checkResponse)
     }
 
     postCard(cardsUrl, cardObj) {
@@ -59,11 +47,7 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify(cardObj)
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-        })
+        .then(this._checkResponse)
     }
     /** отправляет запрос, касающийся лайка карточки
      * @param {*} cardId первый параметр: id карточки
@@ -75,11 +59,7 @@ export default class Api {
             method: like ? 'DELETE' : 'PUT',
             headers: this._headers
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-        })
+        .then(this._checkResponse)
     }
 
     deleteCard(cardId) {
@@ -87,11 +67,7 @@ export default class Api {
             method: 'DELETE',
             headers: this._headers
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-        })
+        .then(this._checkResponse)
     }
     
 }
