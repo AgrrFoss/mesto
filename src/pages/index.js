@@ -1,9 +1,9 @@
 import Card from '../components/Card.js'
-import Section2 from '../components/Section2.js';
+import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js'
-import {initialCards, editForm, cardForm, buttonOpenAddPopup, buttonOpenProfileEdit, config, avatar, avaEdit, avaForm} from '../utils/constants.js'
+import {initialCards, editForm, inputName, inputJob, cardForm, buttonOpenAddPopup, buttonOpenProfileEdit, config, avatar, avaEdit, avaForm} from '../utils/constants.js'
 import './index.css'
 import PopupWithImage from '../components/PopupWithImage.js';
 import Api from '../components/Api.js';
@@ -22,20 +22,11 @@ const validateAvaForm = new FormValidator(avaForm, config);
 validateAvaForm.enableValidation();
 
 const api = new Api ('https://mesto.nomoreparties.co/v1/cohort-43', '5df93b18-5437-4244-a6a2-8b097c8cb05f')
-const user = new UserInfo ({userNameSelector: '.profile__title', UserJobSelector: '.profile__desc'});
+const user = new UserInfo ({userNameSelector: '.profile__title', UserJobSelector: '.profile__desc', userAva: '.profile__ava'});
 
-
-
-/* Старый код получения данных
-api.getUserInfo('/users/me')
-  .then((result) => {
-    userId =result._id
-    user.setUserInfo ({userName: result.name, userJob: result.about, userAva: result.avatar});
-  });
-*/
 
  const profileForm = new PopupWithForm ('#popupEdit', (inputsData) => {
-  profileForm.veiwLoad('Сохранение')
+  profileForm.veiwLoad('Сохранение...')
   const userObj = {
     name: inputsData.name,
     about: inputsData.job
@@ -58,13 +49,14 @@ api.getUserInfo('/users/me')
 profileForm.setEventListeners();
 
 const avatarForm = new PopupWithForm ('#popupAva', (inputsData) => {
-  avatarForm.veiwLoad('Сохранение')
+  avatarForm.veiwLoad('Сохранение...')
   const newAva = {
     avatar: inputsData.avaLink
   }
   api.postUserInfo ('/users/me/avatar', newAva)
   .then ((result) => {
-    avatar.src = result.avatar
+    console.log(result)
+    user.setUserInfo({userAva: result.avatar});
     avatarForm.closePopup();
   })
   .catch ((err) => {
@@ -78,8 +70,8 @@ avatarForm.setEventListeners();
 
 function openEditForm () {
   const userInfoNow = user.getUserInfo()
-  document.querySelector('#popupEdit #nameInput').value = userInfoNow.userName
-  document.querySelector('#popupEdit #jobInput').value = userInfoNow.userJob;
+  inputName.value = userInfoNow.userName
+  inputJob.value = userInfoNow.userJob;
   profileForm.openPopup()
 }
 
@@ -97,8 +89,7 @@ function sendLikeCard (thisCard) {
     .catch(err => console.log(err))
 }
 
-const popupWithConfirmation = new PopupWithConfirmation ('#popupDelete')
-console.log(popupWithConfirmation)
+const popupWithConfirmation = new PopupWithConfirmation ('#popupDelete');
 popupWithConfirmation.setEventListeners()
 
 
@@ -115,7 +106,10 @@ function createCard (data) {
     popupWithConfirmation.openPopup();
     popupWithConfirmation.setSubmitFn(() => {
       api.deleteCard(data._id)
-       .then (newCard.deleteCardFromDOM())
+       .then (() => {
+        newCard.deleteCardFromDOM();
+        popupWithConfirmation.closePopup();
+       })
        .catch ((err) => {
         console.log(err)
     })
@@ -124,32 +118,20 @@ function createCard (data) {
   return newCard.getCard();
 }
 
-const section2 = new Section2 ('.elements');
+const section = new Section ('.elements');
 
 
-/* старый код получения карточек
 
-api.getCard ('/cards')
-    .then((result) => {
-      section2.rendererItems({items: result, renderer: (data) => {
-        section2.addItem(createCard(data));
-      }
-      });
-    })
-    .catch ((err) => {
-      console.log(err)
-  })
-*/
 
-Promise.all([api.getUserInfo('/users/me'), api.getCard ('/cards')])
+Promise.all([api.getUserInfo(), api.getCard ()])
   .then((res) => {
-    const [userInfo, Cards] = res;
+    const [userInfo, cards] = res;
     // заполнение данных пользователя
     userId =userInfo._id
-    user.setUserInfo ({userName: userInfo.name, userJob: userInfo.about, userAva: userInfo.avatar});
+    user.setUserInfo ({userName: userInfo.name, userJob: userInfo.about, userAva: userInfo.avatar, userId: userInfo._id});
     // отрисовка карточек
-    section2.rendererItems({items: Cards, renderer: (data) => {
-      section2.addItem(createCard(data));
+    section.rendererItems({items: cards, renderer: (data) => {
+      section.addItem(createCard(data));
     }
     });
   })
@@ -158,15 +140,8 @@ Promise.all([api.getUserInfo('/users/me'), api.getCard ('/cards')])
   });
 
 
-
-
-
-
-
-
-
 const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
-  cardAdd.veiwLoad('Сохранение')
+  cardAdd.veiwLoad('Сохранение...')
   const placeObj = {
     name: data.placeName,
     link: data.link
@@ -174,7 +149,7 @@ const cardAdd = new PopupWithForm ('#popupAdd', (data) => {
   api.postCard ('/cards', placeObj)
     .then((result) => {
       const newCard = createCard(result);
-      section2.addNewCard(newCard);
+      section.addNewCard(newCard);
       cardAdd.closePopup ()
     })
     .catch ((err) => {

@@ -10,33 +10,29 @@ export  default class Card {
     this._handleViewImage = openCard;
     this._handleLikeImage = likeCard;
     this._handleDeleteCard = deleteCard;
-    }
-
-    _getTemplate () {
-        const elementPlace = document
-                            .querySelector(this._cardTemplate)
-                            .content
-                            .querySelector('.element')
-                            .cloneNode(true);
-        return elementPlace;
+    this._element = document
+    .querySelector(this._cardTemplate)
+    .content
+    .querySelector('.element')
+    .cloneNode(true);
+    this._elementLike = this._element.querySelector('.element__like');
+    this._elementLikeCounter = this._element.querySelector('.element__like-counter');
     }
 
 
     getCard () {
-      this._element = this._getTemplate ();
+      
       this._setEventListeners();
       const _image = this._element.querySelector('.element__image');
       const _title = this._element.querySelector('.element__title');
-      //const _likeCounter = this._element.querySelector('.element__like-counter')
       _image.src = this._link;
       _title.textContent = this._name;
       _image.alt = this._name;  
       this.addLikeCounter (this.likes)
-      //_likeCounter.textContent = this._likes.length;
       if (this._ownerId !== this._userId){
         this._element.removeChild(this._element.querySelector('.element__delete'))}
       if (this.isLiked() === true) {
-        this._element.querySelector('.element__like').classList.add("element__like_active");
+        this._elementLike.classList.add("element__like_active");
       }
       return this._element;
     }
@@ -44,8 +40,7 @@ export  default class Card {
      * @param {*} likes принимает на вход массив с лайкнувшими пользователями
      */
     addLikeCounter (likes) {
-      const _likeCounter = this._element.querySelector('.element__like-counter');
-      _likeCounter.textContent = likes.length;
+      this._elementLikeCounter.textContent = likes.length;
     }
 
     _setEventListeners () {
@@ -53,8 +48,7 @@ export  default class Card {
       .addEventListener('click', () => {this._handleDeleteCard();
       });
      
-      this._element.querySelector('.element__like')
-      .addEventListener('click', () => {this._handleLikeImage(this);
+      this._elementLike.addEventListener('click', () => {this._handleLikeImage(this);
       });
       this._element.querySelector('.element__image').addEventListener('click', () => {this._handleViewImage (this._link, this._name);
       });
@@ -67,8 +61,7 @@ export  default class Card {
     }
 
   changeLike () {
-    this._element.querySelector('.element__like')
-    .classList.toggle("element__like_active");
+    this._elementLike.classList.toggle("element__like_active");
   }
 
   deleteCardFromDOM () {

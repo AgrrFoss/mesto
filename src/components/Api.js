@@ -15,8 +15,8 @@ export default class Api {
         return Promise.reject(`Ошибка ${res.status}`);
     }
 
-    getUserInfo (userUrl) {
-        return fetch(`${this._url}${userUrl}`, {
+    getUserInfo () {
+        return fetch(`${this._url}/users/me`, {
             method: 'GET',
             headers: this._headers
         })
@@ -33,8 +33,8 @@ export default class Api {
         
     }
 
-    getCard (cardsUrl) {
-        return fetch(`${this._url}${cardsUrl}`, {
+    getCard () {
+        return fetch(`${this._url}/cards`, {
             method: 'GET',
             headers: this._headers
         })
