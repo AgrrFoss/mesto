@@ -34,7 +34,7 @@ const user = new UserInfo ({userNameSelector: '.profile__title', UserJobSelector
   api.postUserInfo ('/users/me', userObj)
   .then((result) => {
 
-    user.setUserInfo ({userName: result.name, userJob: result.about, userAva: result.avatar});
+    user.setUserInfo ({userName: result.name, userJob: result.about, userAva: result.avatar, userId: result._id});
     profileForm.closePopup ();
   })
   .catch ((err) => {
@@ -56,7 +56,7 @@ const avatarForm = new PopupWithForm ('#popupAva', (inputsData) => {
   api.postUserInfo ('/users/me/avatar', newAva)
   .then ((result) => {
     console.log(result)
-    user.setUserInfo({userAva: result.avatar});
+    user.setUserInfo({userName: result.name, userJob: result.about, userAva: result.avatar, userId: result._id});
     avatarForm.closePopup();
   })
   .catch ((err) => {
